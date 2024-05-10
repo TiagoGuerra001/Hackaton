@@ -14,9 +14,9 @@
 
 <div class="wrapper">
 
-    <div th:replace="~{/shared/header}"></div>
-
     <div th:replace="~{/shared/menu}"></div>
+
+    <div th:replace="~{/shared/header}"></div>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -29,6 +29,8 @@
 
 
     <div th:replace="~{/shared/footer}"></div>
+
+    <div th:include="Homepage/part-description.html"></div>
 
     <div layout:fragment="script">
 

@@ -88,6 +88,21 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.webjars/three.js -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>three.js</artifactId>
+			<version>r71</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/three-orbit-controls -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>three-orbit-controls</artifactId>
+			<version>82.1.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
