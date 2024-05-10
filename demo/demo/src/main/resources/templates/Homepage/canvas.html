@@ -39,7 +39,7 @@
         function (gltf) {
             //If the file is loaded, add it to the scene
             object = gltf.scene;
-            object.position.set(-1, -1, -1); // Set the position of the object to the center of the scene
+            object.position.set(0, 0, 0); // Set the position of the object to the center of the scene
             scene.add(object);
         },
         function (xhr) {
@@ -82,10 +82,11 @@
     //This adds controls to the camera, so we can rotate / zoom it with the mouse
 
     controls = new OrbitControls(camera, renderer.domElement);
-    controls.minDistance = 0.25; // Set the minimum distance for zooming in
-    controls.maxDistance = 3; // Set the maximum distnace for zooming out
-    
-    
+    //controls.minDistance = 0.25; // Set the minimum distance for zooming in
+    //controls.maxDistance = 3; // Set the maximum distnace for zooming out
+    // Disable zoom and panning
+    controls.enableZoom = false;
+    controls.enablePan = false;
 
     
     //Render the scene
