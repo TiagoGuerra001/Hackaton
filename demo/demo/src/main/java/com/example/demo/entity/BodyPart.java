@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,24 +11,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "t_user")
-public class User {
+@Table(name = "t_BodyPart")
+public class BodyPart {
+
     @Id
     @GeneratedValue
     private Long id;
-
-    @Column(unique = true, nullable = false)
-    private String username;
-
-    @Email
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    private String password;
+    
 }

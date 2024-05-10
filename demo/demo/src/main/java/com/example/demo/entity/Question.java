@@ -11,23 +11,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "t_user")
-public class User {
+@Table(name = "t_question")
+public class Question {
+    
     @Id
     @GeneratedValue
     private Long id;
-
-    @Column(unique = true, nullable = false)
-    private String username;
-
-    @Email
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    private String password;
+    
 }
