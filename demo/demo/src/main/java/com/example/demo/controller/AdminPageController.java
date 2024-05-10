@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * Time: 08.41
  */
 @Controller
+
 public class AdminPageController {
     @Autowired
     private UserRepository userRepository;
@@ -45,5 +48,10 @@ public class AdminPageController {
         model.addAttribute("user", new User());
         return "user-list";
     }
+    @GetMapping("/bodypart/specificPart")
+    public String getMethodName(@RequestParam String param) {
+        return "bodypart";
+    }
+    
 
 }
