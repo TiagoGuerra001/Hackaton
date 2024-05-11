@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WebPageController {
     @GetMapping("/")
     public String index() {
-        return "dashboard";
+        return "home";
     }
 
     @GetMapping("/login")
@@ -30,9 +30,9 @@ public class WebPageController {
         return "register";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/dashboard")
     public String getMethodName() {
-        return "home";
+        return "dashboard";
     }
         
 
