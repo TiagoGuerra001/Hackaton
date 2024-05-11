@@ -1,6 +1,6 @@
 <!-- <link rel="stylesheet" href="style.css">
  -->
-<div id="container3D"></div>
+<div id="container3D" style="width: 100%; height: 100%; overflow: hidden;"></div>
 
 <script type="module">
 
@@ -117,13 +117,13 @@
             switch (body_type) {
                 case 'upper':
                     //FIXME: Change the position
-                    zoomIn(camera, controls, { x: 0, y: 0.5, z: 0 });
+                    zoomIn(camera, controls, { x: 0, y: 1.25, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
                 case 'middle':
-                    zoomIn(camera, controls, { x: 0, y: -0.5, z: 0 });
+                    zoomIn(camera, controls, { x: 0, y: 0, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
                 case 'bottom':
-                    zoomIn(camera, controls, { x: -0.5, y: 0, z: 0 });
+                    zoomIn(camera, controls, { x: 0, y: -1.25, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
                 default:
                     console.log('No body part selected');
@@ -134,12 +134,39 @@
     });
 
     // Zoom the camera to the specified position
-    const zoomIn = (camera, controls, position) => {
-        const target = new THREE.Vector3(position.x, position.y, position.z);
-        controls.target.copy(target);
-        controls.update();
-        camera.position.copy(target.clone().add(new THREE.Vector3(0, 0, 2.5)));
-        console.log(camera.position);
+    const zoomIn = (camera, controls, position, rotation) => {
+        const targetPosition = new THREE.Vector3(position.x, position.y, position.z);
+        const targetRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(rotation.x, rotation.y, rotation.z));
+        const currentPosition = camera.position.clone();
+        const currentRotation = new THREE.Quaternion().setFromEuler(camera.rotation.clone());
+        const duration = 0.5; // duration in seconds
+
+        console.log(targetRotation, currentRotation);
+
+        let currentTime = 0;
+
+        function updateCamera() {
+            currentTime += 0.01; // adjust the speed of the animation here
+
+            const t = Math.min(currentTime / duration, 1); // clamp the value between 0 and 1
+
+            const newPosition = new THREE.Vector3().lerpVectors(currentPosition, targetPosition, t);
+
+            camera.position.copy(newPosition);
+
+            const rotationT = Math.min(currentTime / (duration * 0.5), 1); // adjust the speed of the rotation here
+            camera.quaternion.slerp(targetRotation, rotationT); // slerp to the target rotation
+
+            if (t < 1) {
+                requestAnimationFrame(updateCamera);
+            } else {
+                controls.target.copy(newPosition);
+                controls.update();
+                controls.enableRotate = true; // Enable camera rotation
+            }
+        }
+
+        updateCamera();
     }
 
 
