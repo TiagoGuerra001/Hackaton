@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html layout:decorate="~{shared/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  layout:decorate="~{shared/layout}"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>BodyPart</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>BodyPart</title>
-</head>
+  <body>
+    <div layout:fragment="content">
+      <!-- <h2>BodyPart Page</h2> -->
 
-<body>
-  <div layout:fragment="content">
-    <!-- <h2>BodyPart Page</h2> -->
-
-    <!-- Buttons Section -->
-    <!-- <div class="row">
+      <!-- Buttons Section -->
+      <!-- <div class="row">
       <div class="w-100 d-flex justify-content-center gap-4">
         <a th:href="@{'/bodypart/' + ${mainPart.id}}" type="button" class="btn btn-sm btn-primary" style="width: 120px">
           Documents
@@ -23,76 +25,106 @@
       </div>
     </div> -->
 
-    <div class="card gap-2 h-100">
-      <div class="card-header p-2 d-flex justify-content-center gap-4">
-        <a th:href="@{'/bodypart/' + ${mainPart.id}}" type="button" class="btn btn-sm btn-outline-dark font-weight-bold"
-          style="width: 120px">
-          Documents
-        </a>
-        <a th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}" type="button"
-          class="btn btn-sm btn-outline-dark font-weight-bold" style="width: 120px">
-          Quizzes
-        </a>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col">
-            <div th:include="Homepage/canvas.html" 
-            th:with="modelId='brain/brain.gltf', 
-            modelWidth=500, 
-            modelHeight=500">
+      <div class="card gap-2 h-100">
+        <div class="card-header p-2 d-flex justify-content-center gap-4">
+          <a
+            th:href="@{'/bodypart/' + ${mainPart.id}}"
+            type="button"
+            class="btn btn-sm btn-outline-dark font-weight-bold"
+            style="width: 120px"
+          >
+            Documents
+          </a>
+          <a
+            th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}"
+            type="button"
+            class="btn btn-sm btn-outline-dark font-weight-bold"
+            style="width: 120px"
+          >
+            Quizzes
+          </a>
         </div>
-          </div>
-          <div class="col">
-            <div class="card card-success" style="
-                                            transition: all 0.15s ease 0s;
-                                            height: inherit;
-                                            width: inherit;
-                                          ">
-              <div class="card-header">
-                <h3 class="card-title" th:text="${mainPart.name}"></h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="maximize">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <p th:text="${mainPart.info}"></p>
-              </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div
+                th:include="Homepage/canvas.html"
+                th:with="modelId='brain/brain.gltf', 
+            modelWidth=500, 
+            modelHeight=500"
+              ></div>
             </div>
-
-            <div class="ps-4" th:each="bodyPart : ${bodyParts}">
-              <div class="card collapsed-card">
-                <div class="card-header" th:style="'background-color: ' + ${bodyPart.color} + ' ;'">
-                  <h3 class="card-title" th:text="${bodyPart.name}"></h3>
+            <div class="col" style="align-content: center">
+              <div
+                class="card card-success"
+                style="
+                  transition: all 0.15s ease 0s;
+                  height: inherit;
+                  width: inherit;
+                "
+              >
+                <div class="card-header">
+                  <h3 class="card-title" th:text="${mainPart.name}"></h3>
                   <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                    <button
+                      type="button"
+                      class="btn btn-tool"
+                      data-card-widget="maximize"
+                    >
                       <i class="fas fa-expand"></i>
                     </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-plus"></i>
+                    <button
+                      type="button"
+                      class="btn btn-tool"
+                      data-card-widget="collapse"
+                    >
+                      <i class="fas fa-minus"></i>
                     </button>
                   </div>
                 </div>
                 <div class="card-body">
-                  <p th:text="${bodyPart.info}"></p>
+                  <p th:text="${mainPart.info}"></p>
+                </div>
+              </div>
+
+              <div class="ps-4" th:each="bodyPart : ${bodyParts}">
+                <div class="card collapsed-card">
+                  <div
+                    class="card-header"
+                    th:style="'background-color: ' + ${bodyPart.color} + ' ;'"
+                  >
+                    <h3 class="card-title" th:text="${bodyPart.name}"></h3>
+                    <div class="card-tools">
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-card-widget="maximize"
+                      >
+                        <i class="fas fa-expand"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-card-widget="collapse"
+                      >
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <p th:text="${bodyPart.info}"></p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Bodypart Details -->
+      <!-- Bodypart Details -->
 
-
-    <!-- buttons_fragment.html -->
-    <!-- <div class="row" style="display:flex; justify-content: center">
+      <!-- buttons_fragment.html -->
+      <!-- <div class="row" style="display:flex; justify-content: center">
                   <a th:href="@{'/bodypart/' + ${mainPart.id}}" type="button" class="btn btn-sm bg-gradient-primary"
                     style="margin-right: 10px; width: 120px">
                     Documents
@@ -149,7 +181,6 @@
                     </div>
                   </div>
                 </div> -->
-  </div>
-</body>
-
+    </div>
+  </body>
 </html>

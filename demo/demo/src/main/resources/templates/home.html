@@ -1,29 +1,66 @@
 <!DOCTYPE html>
-<html layout:decorate="~{shared/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
+<html
+  layout:decorate="~{shared/layout}"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
     <title>Home</title>
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <div layout:fragment="content">
-        <div th:include="Homepage/canvas.html" 
-            th:with="modelId='body.gltf,brain/brain.gltf,heart/heart.gltf', 
-            modelWidth=1000, 
-            modelHeight=750">
+      <div class="row">
+        <div class="col" style="align-content: center; margin-left: 5%">
+          <nav class="mt-2">
+            <ul
+              class="nav nav-pills nav-sidebar flex-column"
+              data-accordion="false"
+              data-widget="treeview"
+              role="menu"
+              th:each="mainPart : ${mainParts}"
+            >
+              <button
+                type="button"
+                style="
+                  display: flex;
+                  height: 50px;
+                  width: 150px;
+                  align-content: center;
+                  justify-content: center;
+                  margin-bottom: 10px;
+                  text-align: center;
+                  padding: 10px;
+                "
+                class="btn btn-outline-primary btn-block body-part-nav-item"
+                data-body-part="upper"
+                data-body-part-info=""
+                th:attr="data-body-part=${mainPart.id}, data-body-part-name=${mainPart.name}, data-body-part-info=${mainPart.info}"
+                onclick="changeValue(this)"
+              >
+                <div class="d-flex h-100 align-content: center; gap-2">
+                  <i class="fa fa-book"></i>
+                  <p th:text="${mainPart.name}"></p>
+                </div>
+              </button>
+            </ul>
+          </nav>
         </div>
+        <div
+          class="col"
+          th:include="Homepage/canvas.html"
+          th:with="modelId='body.gltf,brain/brain.gltf,heart/heart.gltf', 
+            modelWidth=1000, 
+            modelHeight=750"
+        ></div>
+      </div>
     </div>
 
     <th:block layout:fragment="script">
-        <script>
-            console.log("Home Page");
-        </script>
+      <script>
+        console.log("Home Page");
+      </script>
     </th:block>
-
-</body>
-
+  </body>
 </html>
