@@ -89,4 +89,21 @@ public class AdminPageController {
         }
         return "bodypart-quizzes";
     }
+
+    @GetMapping("/bodypart/{mainPartId}/quizzes/{bodyPartId}")
+    public String getQuiz(Model model, @PathVariable long mainPartId, @PathVariable long bodyPartId) {
+        Optional<MainPart> mainPartOpt = MPRepository.findById(mainPartId);
+        Optional<BodyPart> bodyPartOpt = BPRepository.findById(bodyPartId);
+        if (mainPartOpt.isPresent()) {
+            MainPart mainPart = mainPartOpt.get();
+            BodyPart bodyPart = bodyPartOpt.get();
+
+            List<Question> questions = bodyPart.getQuestions(); // Assuming there's a method to retrieve questions for a body part
+        
+            model.addAttribute("mainPart", mainPart);
+            model.addAttribute("bodyPart", bodyPart);
+            model.addAttribute("questions", questions);
+        }
+        return "quiz";
+    }
 }
