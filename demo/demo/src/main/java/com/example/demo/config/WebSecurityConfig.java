@@ -13,16 +13,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : adminlte3-sample
- * User: TOSHIBA
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 9/13/2021
- * Time: 5:53 AM
- * To change this template use File | Settings | File Templates.
- */
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -58,19 +49,22 @@ public class WebSecurityConfig {
   
 public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     http
-            .csrf().disable()
-            .authorizeRequests()
-            .anyRequest().permitAll() // Permit all requests
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/login")
-            .defaultSuccessUrl("/", true)
-            .failureUrl("/login?error")
-            .and()
-            .logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/login?logout");
+             .csrf().disable()
+                .authorizeRequests()
+                .requestMatchers("/login", "/register", "/css/**", "/js/**", "/images/**", "/webjars/**", "/favicon" +
+                        ".ico").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout");
+
     return http.build();
 }
 
