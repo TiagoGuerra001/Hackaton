@@ -40,19 +40,18 @@
   let controls;
 
   //Set which object to render
-  let objToRender =
-    document.getElementById("container3D").getAttribute("data-model-id") +
-    ".gltf";
+  let objToRender = document
+    .getElementById("container3D")
+    .getAttribute("data-model-id");
+
+  //split the objToRender string to get the list of models to load
+  const models1 = objToRender.split(",");
 
   //Instantiate a loader for the .gltf file
   const loader = new GLTFLoader();
 
-  //Load the file
-  // Load multiple models
-  const models = ["body.gltf", "brain/brain.gltf", "heart/heart.gltf"];
-
   // Loop through the models array and load each model
-  models.forEach((model) => {
+  models1.forEach((model) => {
     loader.load(
       `/Models/${model}`,
       function (gltf) {
@@ -98,7 +97,7 @@
       //object.add(marker);
       markers.push(marker);
       bodyPartsModels.push(object);
-    } else if(filename == "brain/brain.gltf") {
+    } else if (filename == "brain/brain.gltf") {
       object.position.set(0, 1.135, 0.035); // Set the position of the object to the center of the scene
       object.scale.set(0.2, 0.2, 0.2); // Set the scale of the object
 
@@ -112,34 +111,34 @@
 
       // Set the position of the marker
       marker.position.set(0, 0.8, 0.25);
-      marker.scale.set(0.20, 0.20, 0.20);
+      marker.scale.set(0.2, 0.2, 0.2);
 
       // Add the marker to the scene
       object.add(marker);
       console.log(object.name);
       markers.push(marker);
       bodyPartsModels.push(object);
-    }else{
-        object.position.set(0.1, 0.55, 0); // Set the position of the object to the center of the scene
-        object.rotation.set(0,90,0);
-        object.scale.set(0.0015, 0.0015, 0.0015); // Set the scale of the object
-    
-        object.name = "Heart";
-        const markerGeometry = new THREE.CircleGeometry(1, 32);
-        const markerMaterial = new THREE.MeshBasicMaterial({
-            color: 0xff0000,
-            depthTest: false,
-        });
-        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
-    
-        // Set the position of the marker
-        marker.position.set(0, 1, 0.25);
-        marker.scale.set(30,30, 30);
-    
-        // Add the marker to the scene
-        object.add(marker);
-        markers.push(marker);
-        bodyPartsModels.push(object);
+    } else {
+      object.position.set(0.1, 0.55, 0); // Set the position of the object to the center of the scene
+      object.rotation.set(0, 90, 0);
+      object.scale.set(0.0015, 0.0015, 0.0015); // Set the scale of the object
+
+      object.name = "Heart";
+      const markerGeometry = new THREE.CircleGeometry(1, 32);
+      const markerMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff0000,
+        depthTest: false,
+      });
+      const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+
+      // Set the position of the marker
+      marker.position.set(0, 1, 0.25);
+      marker.scale.set(30, 30, 30);
+
+      // Add the marker to the scene
+      object.add(marker);
+      markers.push(marker);
+      bodyPartsModels.push(object);
     }
   }
 
@@ -233,7 +232,11 @@
           zoomIn(
             camera,
             controls,
-            {x: bodyPartsModels[2].position.x, y: bodyPartsModels[2].position.y, z: 0.75},
+            {
+              x: bodyPartsModels[2].position.x,
+              y: bodyPartsModels[2].position.y,
+              z: 0.75,
+            },
             { x: 0, y: 0, z: 0 }
           );
           break;
@@ -241,7 +244,11 @@
           zoomIn(
             camera,
             controls,
-            {x: bodyPartsModels[1].position.x, y: bodyPartsModels[1].position.y, z: 0.75},
+            {
+              x: bodyPartsModels[1].position.x,
+              y: bodyPartsModels[1].position.y,
+              z: 0.75,
+            },
             { x: 0, y: 0, z: 0 }
           );
           break;
@@ -309,11 +316,13 @@
     updateCamera();
   };
 
-  document.getElementById("part-description").addEventListener("hidden.bs.offcanvas", () => {
-    camera.position.set(0, 0, 2.5);
-    controls.target.set(0, 0, 0);
-    controls.update();
-  });
+  document
+    .getElementById("part-description")
+    .addEventListener("hidden.bs.offcanvas", () => {
+      camera.position.set(0, 0, 2.5);
+      controls.target.set(0, 0, 0);
+      controls.update();
+    });
 
   // Add event listener to detect mouse hover over a marker
   renderer.domElement.addEventListener("mousemove", onMouseMove);
