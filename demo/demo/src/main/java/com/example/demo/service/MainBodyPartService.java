@@ -39,6 +39,7 @@ public class MainBodyPartService {
         user.setUsername("admin");
         user.setPassword(passwordEncoder.encode("admin"));
         user.setEmail("1@1");
+        user.setCoins(70);
         userDAORepository.save(user);
         // Create a MainPart
         MainPart brain = new MainPart();
