@@ -11,7 +11,7 @@
 <body>
 
     <div layout:fragment="content">
-        <div th:include="Homepage/canvas.html"></div>
+        <div th:include="Homepage/canvas.html" th:with="modelId='brain/brain'"></div>
     </div>
 
     <th:block layout:fragment="script">

@@ -1,6 +1,8 @@
 <!-- <link rel="stylesheet" href="style.css">
  -->
-<div id="container3D" style="width: 100%; height: 100%; overflow: hidden;"></div>
+
+ 
+ <div id="container3D" th:attr="data-model-id=${modelId}" style="width: 100%; height: 100%; overflow: hidden;"></div>
 
 <script type="module">
 
@@ -28,7 +30,7 @@
     let controls;
 
     //Set which object to render
-    let objToRender = 'body.gltf';
+    let objToRender = document.getElementById("container3D").getAttribute('data-model-id') + '.gltf';
 
     //Instantiate a loader for the .gltf file
     const loader = new GLTFLoader();
@@ -169,6 +171,12 @@
         updateCamera();
     }
 
+    document.getElementById('ResetModel').addEventListener('click', () => {
+        camera.position.set(0, 0, 2.5);
+        controls.target.set(0, 0, 0);
+        controls.update();
+    });
+
 
     //add mouse position listener, so we can make the eye move
     document.onmousemove = (e) => {
@@ -178,6 +186,8 @@
 
     //Start the 3D rendering
     animate();
+
+
 
 
 </script>
