@@ -23,6 +23,9 @@ public class Question {
     @GeneratedValue
     private Long id;
 
+    @Column(name = "text")
+    private String text;
+
     @Column(name = "difficulty")
     private int difficulty;
 
