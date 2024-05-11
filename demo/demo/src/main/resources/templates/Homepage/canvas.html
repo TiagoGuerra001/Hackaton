@@ -1,117 +1,203 @@
 <!-- <link rel="stylesheet" href="style.css">
  -->
 
- 
- <div id="container3D" th:attr="data-model-id=${modelId}" style="width: 100%; height: 100%; overflow: hidden;"></div>
+<div
+  id="container3D"
+  th:attr="data-model-id=${modelId}"
+  style="width: 100%; height: 100%; overflow: hidden"
+></div>
 
 <script type="module">
+  //Import the THREE.js library
+  import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
+  // To allow for the camera to move around the scene
+  import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
+  // To allow for importing the .gltf file
+  import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 
-    //Import the THREE.js library
-    import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
-    // To allow for the camera to move around the scene
-    import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
-    // To allow for importing the .gltf file
-    import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
+  // Get the width and height of the div with id container3D
+  const container3D = document.getElementById("container3D");
+  const width = window.innerWidth; //container3D.clientWidth;
+  const height = window.innerHeight; //container3D.clientHeight;
 
-    // Get the width and height of the div with id container3D
-    const container3D = document.getElementById("container3D");
-    const width = container3D.clientWidth;
-    const height = container3D.clientHeight;
+  //Create a Three.JS Scene
+  const scene = new THREE.Scene();
+  //create a new camera with positions and angles
+  const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 
-    //Create a Three.JS Scene
-    const scene = new THREE.Scene();
-    //create a new camera with positions and angles
-    const camera = new THREE.PerspectiveCamera(75, window.width / window.height , 0.1, 1000);
+  //Keep the 3D object on a global variable so we can access it later
+  let object;
 
-    //Keep track of the mouse position, so we can make the eye move
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
+  let mouse = new THREE.Vector2();
+  let raycaster = new THREE.Raycaster();
 
-    //Keep the 3D object on a global variable so we can access it later
-    let object;
+  //list of markers
+  let markers = [];
+  //list of models
+  let bodyPartsModels = [];
 
-    //OrbitControls allow the camera to move around the scene
-    let controls;
+  //OrbitControls allow the camera to move around the scene
+  let controls;
 
-    //Set which object to render
-    let objToRender = document.getElementById("container3D").getAttribute('data-model-id') + '.gltf';
+  //Set which object to render
+  let objToRender =
+    document.getElementById("container3D").getAttribute("data-model-id") +
+    ".gltf";
 
-    //Instantiate a loader for the .gltf file
-    const loader = new GLTFLoader();
+  //Instantiate a loader for the .gltf file
+  const loader = new GLTFLoader();
 
-    //Load the file
+  //Load the file
+  // Load multiple models
+  const models = ["body.gltf", "brain/brain.gltf", "heart/heart.gltf"];
+
+  // Loop through the models array and load each model
+  models.forEach((model) => {
     loader.load(
-        `/Models/${objToRender}`,
-        function (gltf) {
-            //If the file is loaded, add it to the scene
-            object = gltf.scene;
-            object.position.set(0, 0, 0); // Set the position of the object to the center of the scene
-            scene.add(object);
-        },
-        function (xhr) {
-            //While it is loading, log the progress
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-        },
-        function (error) {
-            //If there is an error, log it
-            console.error(error);
-        }
+      `/Models/${model}`,
+      function (gltf) {
+        // If the file is loaded, add it to the scene
+        const object = gltf.scene;
+        InitializeModels(object, model);
+        scene.add(object);
+      },
+      function (xhr) {
+        // While it is loading, log the progress
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+      },
+      function (error) {
+        // If there is an error, log it
+        console.error(error);
+      }
     );
+  });
 
+  function InitializeModels(object, filename) {
+    if (filename == "body.gltf") {
+      object.position.set(0, 0, 0); // Set the position of the object to the center of the scene
+      object.name = "Body";
+      object.traverse(function (node) {
+        if (node.isMesh) {
+          node.material.transparent = true;
+          node.material.opacity = 0.5;
+        }
+      });
 
+      const markerGeometry = new THREE.CircleGeometry(1, 32);
+      const markerMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff0000,
+        depthTest: false,
+      });
+      const marker = new THREE.Mesh(markerGeometry, markerMaterial);
 
-    //Instantiate a new renderer and set its size
-    const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
-    renderer.setSize(window.innerWidth, window.innerHeight);
+      // Set the position of the marker
+      marker.position.set(0, 0, 0);
+      marker.scale.set(0.05, 0.05, 0.05);
 
-    //Add the renderer to the DOM
-    document.getElementById("container3D").appendChild(renderer.domElement);
+      // Add the marker to the scene
+      //object.add(marker);
+      markers.push(marker);
+      bodyPartsModels.push(object);
+    } else if(filename == "brain/brain.gltf") {
+      object.position.set(0, 1.135, 0.035); // Set the position of the object to the center of the scene
+      object.scale.set(0.2, 0.2, 0.2); // Set the scale of the object
 
-    //Set how far the camera will be from the 3D model
-    camera.position.z = 2.5;
-    camera.updateProjectionMatrix();
+      object.name = "Brain";
+      const markerGeometry = new THREE.CircleGeometry(1, 32);
+      const markerMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff0000,
+        depthTest: false,
+      });
+      const marker = new THREE.Mesh(markerGeometry, markerMaterial);
 
-    //Add lights to the scene, so we can actually see the 3D model
-    const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
-    topLight.position.set(500, 500, 500) //top-left-ish
-    topLight.castShadow = true;
+      // Set the position of the marker
+      marker.position.set(0, 0.8, 0.25);
+      marker.scale.set(0.20, 0.20, 0.20);
 
-    const bottomLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
-    bottomLight.position.set(-500, -500, -500); //bottom-right-ish
-    bottomLight.castShadow = true;
-    scene.add(bottomLight);
-
-    scene.add(topLight);
-
-    const ambientLight = new THREE.AmbientLight(0x333333, 1);
-    scene.add(ambientLight);
-
-    //This adds controls to the camera, so we can rotate / zoom it with the mouse
-
-    controls = new OrbitControls(camera, renderer.domElement);
-    //controls.minDistance = 0.25; // Set the minimum distance for zooming in
-    //controls.maxDistance = 3; // Set the maximum distnace for zooming out
-    // Disable zoom and panning
-    controls.enableZoom = false;
-    controls.enablePan = false;
-
-
-    //Render the scene
-    function animate() {
-        requestAnimationFrame(animate);
-        //Here we could add some code to update the scene, adding some automatic movement
-
-        renderer.render(scene, camera);
+      // Add the marker to the scene
+      object.add(marker);
+      console.log(object.name);
+      markers.push(marker);
+      bodyPartsModels.push(object);
+    }else{
+        object.position.set(0.1, 0.55, 0); // Set the position of the object to the center of the scene
+        object.rotation.set(0,90,0);
+        object.scale.set(0.0015, 0.0015, 0.0015); // Set the scale of the object
+    
+        object.name = "Heart";
+        const markerGeometry = new THREE.CircleGeometry(1, 32);
+        const markerMaterial = new THREE.MeshBasicMaterial({
+            color: 0xff0000,
+            depthTest: false,
+        });
+        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+    
+        // Set the position of the marker
+        marker.position.set(0, 1, 0.25);
+        marker.scale.set(30,30, 30);
+    
+        // Add the marker to the scene
+        object.add(marker);
+        markers.push(marker);
+        bodyPartsModels.push(object);
     }
+  }
 
-    //Add a listener to the window, so we can resize the window and the camera
-    window.addEventListener("resize", function () {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+  //Instantiate a new renderer and set its size
+  const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  //Add the renderer to the DOM
+  document.getElementById("container3D").appendChild(renderer.domElement);
+
+  //Set how far the camera will be from the 3D model
+  camera.position.z = 2.5;
+  camera.updateProjectionMatrix();
+
+  //Add lights to the scene, so we can actually see the 3D model
+  const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
+  topLight.position.set(500, 500, 500); //top-left-ish
+  topLight.castShadow = true;
+
+  const bottomLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
+  bottomLight.position.set(-500, -500, -500); //bottom-right-ish
+  bottomLight.castShadow = true;
+  scene.add(bottomLight);
+
+  scene.add(topLight);
+
+  const ambientLight = new THREE.AmbientLight(0x333333, 1);
+  scene.add(ambientLight);
+
+  //This adds controls to the camera, so we can rotate / zoom it with the mouse
+
+  controls = new OrbitControls(camera, renderer.domElement);
+  //controls.minDistance = 0.25; // Set the minimum distance for zooming in
+  //controls.maxDistance = 3; // Set the maximum distnace for zooming out
+  // Disable zoom and panning
+  controls.enableZoom = false;
+  controls.enablePan = false;
+
+  //Render the scene
+  function animate() {
+    requestAnimationFrame(animate);
+    //Here we could add some code to update the scene, adding some automatic movement
+    // Update the markers rotation to always face the camera
+    markers.forEach((marker) => {
+      marker.lookAt(camera.position);
     });
 
-    /* renderer.domElement.addEventListener('resize', () => {
+    renderer.render(scene, camera);
+  }
+
+  //Add a listener to the window, so we can resize the window and the camera
+  window.addEventListener("resize", function () {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  /* renderer.domElement.addEventListener('resize', () => {
         const canvas = renderer.domElement;
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
@@ -125,93 +211,142 @@
         }
     }); */
 
-    const body_parts = document.querySelectorAll('.body-part-nav-item');
-    console.log(body_parts);
+  const body_parts = document.querySelectorAll(".body-part-nav-item");
+  console.log(body_parts);
 
-    const part_description_offcanvas = new bootstrap.Offcanvas('#part-description')
+  const part_description_offcanvas = new bootstrap.Offcanvas(
+    "#part-description"
+  );
 
-    body_parts.forEach((part) => {
-        part.addEventListener('click', (e) => {
+  body_parts.forEach((part) => {
+    part.addEventListener("click", (e) => {
+      const parentNode = e.target.parentNode;
+      //console.log(parentNode);
 
-            const parentNode = e.target.parentNode;
-            //console.log(parentNode);
+      part_description_offcanvas.hide();
 
-            part_description_offcanvas.hide();
-
-            const body_type = parentNode.getAttribute('data-body-part-name');
-            console.log(body_type);
-            switch (body_type) {
-                case 'Brain':
-                    //FIXME: Change the position
-                    zoomIn(camera, controls, { x: 0, y: 1.25, z: 0.75 }, { x: 0, y: 0, z: 0 });
-                    break;
-                case 'Arm':
-                    zoomIn(camera, controls, { x: 0, y: 0, z: 0.75 }, { x: 0, y: 0, z: 0 });
-                    break;
-                case 'Feet':
-                    zoomIn(camera, controls, { x: 0, y: -1.25, z: 0.75 }, { x: 0, y: 0, z: 0 });
-                    break;
-                default:
-                    console.log('No body part selected');
-                    break;
-            }
-            part_description_offcanvas.show();
-        });
+      const body_type = parentNode.getAttribute("data-body-part-name");
+      console.log(body_type);
+      switch (body_type) {
+        case "Brain":
+          //FIXME: Change the position
+          zoomIn(
+            camera,
+            controls,
+            {x: bodyPartsModels[2].position.x, y: bodyPartsModels[2].position.y, z: 0.75},
+            { x: 0, y: 0, z: 0 }
+          );
+          break;
+        case "Heart":
+          zoomIn(
+            camera,
+            controls,
+            {x: bodyPartsModels[1].position.x, y: bodyPartsModels[1].position.y, z: 0.75},
+            { x: 0, y: 0, z: 0 }
+          );
+          break;
+        case "Feet":
+          zoomIn(
+            camera,
+            controls,
+            { x: 0, y: -1.25, z: 0.75 },
+            { x: 0, y: 0, z: 0 }
+          );
+          break;
+        default:
+          console.log("No body part selected");
+          break;
+      }
+      part_description_offcanvas.show();
     });
+  });
 
-    // Zoom the camera to the specified position
-    const zoomIn = (camera, controls, position, rotation) => {
-        const targetPosition = new THREE.Vector3(position.x, position.y, position.z);
-        const targetRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(rotation.x, rotation.y, rotation.z));
-        const currentPosition = camera.position.clone();
-        const currentRotation = new THREE.Quaternion().setFromEuler(camera.rotation.clone());
-        const duration = 0.5; // duration in seconds
+  // Zoom the camera to the specified position
+  const zoomIn = (camera, controls, position, rotation) => {
+    const targetPosition = new THREE.Vector3(
+      position.x,
+      position.y,
+      position.z
+    );
+    const targetRotation = new THREE.Quaternion().setFromEuler(
+      new THREE.Euler(rotation.x, rotation.y, rotation.z)
+    );
+    const currentPosition = camera.position.clone();
+    const currentRotation = new THREE.Quaternion().setFromEuler(
+      camera.rotation.clone()
+    );
+    const duration = 0.5; // duration in seconds
 
-        console.log(targetRotation, currentRotation);
+    console.log(targetRotation, currentRotation);
 
-        let currentTime = 0;
+    let currentTime = 0;
 
-        function updateCamera() {
-            currentTime += 0.01; // adjust the speed of the animation here
+    function updateCamera() {
+      currentTime += 0.01; // adjust the speed of the animation here
 
-            const t = Math.min(currentTime / duration, 1); // clamp the value between 0 and 1
+      const t = Math.min(currentTime / duration, 1); // clamp the value between 0 and 1
 
-            const newPosition = new THREE.Vector3().lerpVectors(currentPosition, targetPosition, t);
+      const newPosition = new THREE.Vector3().lerpVectors(
+        currentPosition,
+        targetPosition,
+        t
+      );
 
-            camera.position.copy(newPosition);
+      camera.position.copy(newPosition);
 
-            const rotationT = Math.min(currentTime / (duration * 0.5), 1); // adjust the speed of the rotation here
-            camera.quaternion.slerp(targetRotation, rotationT); // slerp to the target rotation
+      const rotationT = Math.min(currentTime / (duration * 0.5), 1); // adjust the speed of the rotation here
+      camera.quaternion.slerp(targetRotation, rotationT); // slerp to the target rotation
 
-            if (t < 1) {
-                requestAnimationFrame(updateCamera);
-            } else {
-                controls.target.copy(newPosition);
-                controls.update();
-                controls.enableRotate = true; // Enable camera rotation
-            }
-        }
-
-        updateCamera();
-    }
-
-    document.getElementById('ResetModel').addEventListener('click', () => {
-        camera.position.set(0, 0, 2.5);
-        controls.target.set(0, 0, 0);
+      if (t < 1) {
+        requestAnimationFrame(updateCamera);
+      } else {
+        controls.target.copy(newPosition);
         controls.update();
-    });
-
-
-    //add mouse position listener, so we can make the eye move
-    document.onmousemove = (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        controls.enableRotate = true; // Enable camera rotation
+      }
     }
 
-    //Start the 3D rendering
-    animate();
+    updateCamera();
+  };
 
+  document.getElementById("part-description").addEventListener("hidden.bs.offcanvas", () => {
+    camera.position.set(0, 0, 2.5);
+    controls.target.set(0, 0, 0);
+    controls.update();
+  });
 
+  // Add event listener to detect mouse hover over a marker
+  renderer.domElement.addEventListener("mousemove", onMouseMove);
 
+  function onMouseMove(event) {
+    // Calculate normalized device coordinates (NDC) of mouse position
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
+    // Update the picking ray with the camera and mouse position
+    raycaster.setFromCamera(mouse, camera);
+
+    // Calculate intersections with markers
+    const intersects = raycaster.intersectObjects(markers, true);
+
+    if (intersects.length > 0) {
+      // Mouse is hovering over a marker
+      // Add your code here to handle the hover event
+      console.log("Mouse is hovering over a marker");
+      // Open a small modal to display some text
+      const modal = document.createElement("div");
+      modal.classList.add("modal");
+      modal.innerHTML = "This is some text";
+      document.body.appendChild(modal);
+    } else {
+      //close the modal
+      const modal = document.querySelector(".modal");
+      if (modal) {
+        modal.remove();
+      }
+    }
+  }
+
+  //Start the 3D rendering
+  animate();
 </script>
