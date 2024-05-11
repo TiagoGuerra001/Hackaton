@@ -10,8 +10,11 @@ import com.example.demo.repository.BodyPartRepository;
 import com.example.demo.repository.QuestionsRepository;
 import com.example.demo.repository.UserDAORepository;
 
+import groovyjarjarantlr4.v4.codegen.model.SrcOp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -63,14 +67,11 @@ public class AdminPageController {
 
     @GetMapping("/bodypart/{id}")
     public String getBodyPart(Model model, @PathVariable long id) {
-
-        UserDataModel user = (UserDataModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDAO userDAO = new UserDAO();
-        userDAO.setUsername(user.getUsername());
-        userDAO.setEmail(user.getEmail());
-        userDAO.setPassword(user.getPassword());
+        //Access current user
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDAO userDAO = userDAORepository.findByUsername(user.getUsername()).get();
         model.addAttribute("userEnter", userDAO);
-
+        
         Optional<MainPart> mainPartopt = MPRepository.findById(id);
         var mainPart = mainPartopt.get();
         if (mainPart != null) {
@@ -82,11 +83,9 @@ public class AdminPageController {
 
     @GetMapping("/bodypart/{id}/quizzes")
     public String getQuizzes(Model model, @PathVariable long id) {
-        UserDataModel user = (UserDataModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDAO userDAO = new UserDAO();
-        userDAO.setUsername(user.getUsername());
-        userDAO.setEmail(user.getEmail());
-        userDAO.setPassword(user.getPassword());
+        //Access current user
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDAO userDAO = userDAORepository.findByUsername(user.getUsername()).get();
         model.addAttribute("userEnter", userDAO);
 
         Optional<MainPart> mainPartOpt = MPRepository.findById(id);
@@ -110,20 +109,48 @@ public class AdminPageController {
 
     @GetMapping("/bodypart/{mainPartId}/quizzes/{bodyPartId}")
     public String getQuiz(Model model, @PathVariable long mainPartId, @PathVariable long bodyPartId) {
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDAO userDAO = userDAORepository.findByUsername(user.getUsername()).get();
+        model.addAttribute("userEnter", userDAO);
+
         Optional<MainPart> mainPartOpt = MPRepository.findById(mainPartId);
         Optional<BodyPart> bodyPartOpt = BPRepository.findById(bodyPartId);
-        // ...
 
         MainPart mainPart = mainPartOpt.get();
         BodyPart bodyPart = bodyPartOpt.get();
 
+        //Shuffle the questions
         List<Question> questions = bodyPart.getQuestions();
         Collections.shuffle(questions);
         questions = questions.subList(0, 3);
 
+        //Shuffle the answers
+        List<List<String>> questionsStrings = new ArrayList<>(); 
+        for (Question question : questions) {
+            List<String> strings = question.getWrongAnswers();
+            strings.add(question.getCorrectAnswer());
+            Collections.shuffle(strings);
+            questionsStrings.add(strings);    
+        }
+        
         model.addAttribute("mainPart", mainPart);
         model.addAttribute("bodyPart", bodyPart);
         model.addAttribute("questions", questions);
-        return "quiz";
+        model.addAttribute("questionsStrings", questionsStrings);
+        return "quizz";
     }
+
+    @PostMapping("/bodypart/{mainPartId}/quizzes/{bodyPartId}/submit-quiz")
+    public String submitQuiz(@PathVariable long mainPartId, @PathVariable long bodyPartId, @RequestParam("answers") String[] answers) {
+        
+        // Process submitted quiz data
+        for (int i = 0; i < answers.length; i++) {
+            String answer = answers[i];
+            // Process each question ID and its corresponding answer
+            System.out.println(", Answer: " + answer);
+        }
+        // Redirect to a result page or return a view name
+        return "redirect:/bodypart/"+  mainPartId + "/quizzes";
+    }
+
 }
