@@ -137,9 +137,9 @@
                 <!-- Menu Body -->
                 <li class="user-body">
                     <p class="text-center d-flex flex-column">
-                        {name}
-                        <!-- <small>Member since Nov. 2012</small> -->
-                        <small>{email}</small>
+                    <p th:text="${userEnter.username}"></p>
+                    <!-- <small>Member since Nov. 2012</small> -->
+                    <small th:text="${userEnter.email}"></small>
                     </p>
                     <!-- <div class="row">
                         <div class="col-4 text-center">
