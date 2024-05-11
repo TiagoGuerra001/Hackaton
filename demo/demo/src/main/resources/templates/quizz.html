@@ -12,43 +12,22 @@
       <h2>Quiz Page</h2>
       
        <!-- form -->
-       <form th:action="'/bodypart/' + ${mainPart.id} + '/quizzes/' + ${bodyPart.id}+ '/submit-quiz'" method="post">
+       <form th:action="'/bodypart/' + ${mainPart.id} + '/quizzes/' + ${bodyPart.id}+ '/submit-quiz'" method="post" >
 
         <!-- questions sections -->
         <div class="card" th:each="question, questionIndex : ${questions}">
           <div class="card-body">
+            <input type="hidden" th:name="questionId + ${questionIndex.index}" th:value="${question.id}" />
             <h3 th:text="${question.text}"></h3>
             <!-- answers-->
             <div class="form-group" th:each="answer, answerIndex : ${questionsStrings[__${questionIndex.index}__]}">
               <label>
-                <input type="radio" th:name="${questionIndex.index}" th:value="${answer}" th:id="'answer_' + ${questionIndex.index} + '_' + ${answerIndex.index}">
+                <input type="radio" th:name="answer + ${questionIndex.index}" th:value="${answer}">
                 <span th:text="${answer}"></span>
-              </label>
+              </label>  
             </div>
           </div>
         </div>
-
-
-
-          
-          <!-- <div th:each="question, questionIndex : ${questions}">
-            <div class="card-body">
-              <h3 th:text="${question.text}"></h3>
-              <div class="row">
-
-                
-                  <div th:each="questionString, stringIndex : ${questionsStrings[__${questionIndex.index}__]}">
-                      <div class="col-md-4">
-                          <div class="form-group">
-                              <input type="radio" path="answers" th:id="'choice' + ${questionIndex.index} + '_' + ${stringIndex.index}" th:name="${questionIndex.index}" th:value="${questionString}" />
-                              <label th:text="${questionString}"></label>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>        
-          </div>   -->
-
           <!-- Add submit button -->
           <button type="submit">Submit</button>
         </form>
