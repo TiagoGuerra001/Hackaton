@@ -16,6 +16,7 @@ import com.example.demo.entity.MainPart;
 import com.example.demo.entity.UserDAO;
 import com.example.demo.repository.MainPartRepository;
 import com.example.demo.repository.UserDAORepository;
+import com.example.demo.repository.ItemRepository;
 
 @Controller
 public class WebPageController {
@@ -25,6 +26,9 @@ public class WebPageController {
 
     @Autowired
     private UserDAORepository userRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -48,8 +52,17 @@ public class WebPageController {
         return "login";
     }
 
-    @GetMapping("/shop")
-    public String shop() {
+    @RequestMapping("/shop")
+    public String shop(Model model) {
+        //current user
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDAO userDAO = userRepository.findByUsername(user.getUsername()).get();
+        var userCoins = userDAO.getCoins();
+        
+        model.addAttribute("userEnter", userDAO);
+        model.addAttribute("userCoins", userCoins);
+        model.addAttribute("shopItems", itemRepository.findAll());
+        
         return "shop";
     }
     

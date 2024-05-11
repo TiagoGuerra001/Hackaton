@@ -40,12 +40,13 @@ public class AdminPageController {
     @Autowired
     private BodyPartRepository BPRepository;
     @Autowired
-    private QuestionsRepository QRepository;
+    private QuestionsRepository QRepository;;
 
     @GetMapping({ "/user/list", "/admin/user" })
     public String listUser() {
         return "user-list";
     }
+
 
     @GetMapping("/user/list2")
     public String listUser2(Model model) {
@@ -232,5 +233,7 @@ public class AdminPageController {
         // Redirect to a result page or return a view name
         return "redirect:/bodypart/"+  mainPartId + "/quizzes";
     }
+
+    
 
 }

@@ -9,9 +9,11 @@ import com.example.demo.repository.MainPartRepository;
 import com.example.demo.repository.BodyPartRepository;
 import com.example.demo.repository.QuestionsRepository;
 import com.example.demo.repository.UserDAORepository;
+import com.example.demo.repository.ItemRepository;
 import com.example.demo.entity.MainPart;
 import com.example.demo.entity.BodyPart;
 import com.example.demo.entity.Question;
+import com.example.demo.entity.Item;
 import com.example.demo.entity.UserDAO;
 
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class MainBodyPartService {
     private QuestionsRepository questionRepository;
     @Autowired
     private UserDAORepository userDAORepository;
+    @Autowired
+    private ItemRepository itemRepository;
     // get passwordencoder
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -184,6 +188,52 @@ public class MainBodyPartService {
         questionRepository.save(question4);
         questionRepository.save(question5);
         questionRepository.save(question6);
+
+        //Create Item
+        Item liver = new Item();
+        liver.setName("Liver");
+        liver.setInfo("Stuff about the liver.");
+        liver.setPrice(10);
+        liver.setImageID("liver");
+
+        Item lungs = new Item();
+        lungs.setName("Lungs");
+        lungs.setInfo("Stuff about the lungs.");
+        lungs.setPrice(20);
+        lungs.setImageID("lungs");
+
+        Item stomach = new Item();
+        stomach.setName("Stomach");
+        stomach.setInfo("Stuff about the stomach.");
+        stomach.setPrice(30);
+        stomach.setImageID("stomach");
+
+        Item muscleAnat = new Item();
+        muscleAnat.setName("Muscle Anatomy");
+        muscleAnat.setInfo("Stuff about muscle anatomy.");
+        muscleAnat.setPrice(40);
+        muscleAnat.setImageID("musclesAnatomy.png");
+
+        Item skeletonAnat = new Item();
+        skeletonAnat.setName("Skeleton Anatomy");
+        skeletonAnat.setInfo("Stuff about skeleton anatomy.");
+        skeletonAnat.setPrice(50);
+        skeletonAnat.setImageID("skeletonAnatomy.png");
+
+        Item circulationAnat = new Item();
+        circulationAnat.setName("Circulation Anatomy");
+        circulationAnat.setInfo("Stuff about circulation anatomy.");
+        circulationAnat.setPrice(60);
+        circulationAnat.setImageID("circulationAnatomy.png");
+
+        itemRepository.save(liver);
+        itemRepository.save(lungs);
+        itemRepository.save(stomach);
+        itemRepository.save(muscleAnat);
+        itemRepository.save(skeletonAnat);
+        itemRepository.save(circulationAnat);
+        
+
 
     }
 }
