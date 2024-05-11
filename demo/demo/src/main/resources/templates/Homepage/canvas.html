@@ -3,7 +3,7 @@
 
 <div
   id="container3D"
-  th:attr="data-model-id=${modelId}"
+  th:attr="data-model-id=${modelId}, data-model-width=${modelWidth}, data-model-height=${modelHeight}" 
   style="width: 100%; height: 100%; overflow: hidden"
 ></div>
 
@@ -17,8 +17,12 @@
 
   // Get the width and height of the div with id container3D
   const container3D = document.getElementById("container3D");
-  const width = window.innerWidth; //container3D.clientWidth;
-  const height = window.innerHeight; //container3D.clientHeight;
+  const width = container3D.getAttribute("data-model-width");
+  const height = container3D.getAttribute("data-model-height");
+
+  //change the size of the container
+    container3D.style.width = width + "px";
+    container3D.style.height = height + "px";
 
   //Create a Three.JS Scene
   const scene = new THREE.Scene();
@@ -114,13 +118,13 @@
       marker.scale.set(0.2, 0.2, 0.2);
 
       // Add the marker to the scene
-      object.add(marker);
+      //object.add(marker);
       console.log(object.name);
       markers.push(marker);
       bodyPartsModels.push(object);
     } else {
       object.position.set(0.1, 0.55, 0); // Set the position of the object to the center of the scene
-      object.rotation.set(0, 90, 0);
+      object.rotation.set(0, 45, 0);
       object.scale.set(0.0015, 0.0015, 0.0015); // Set the scale of the object
 
       object.name = "Heart";
@@ -136,7 +140,7 @@
       marker.scale.set(30, 30, 30);
 
       // Add the marker to the scene
-      object.add(marker);
+     // object.add(marker);
       markers.push(marker);
       bodyPartsModels.push(object);
     }
@@ -144,7 +148,7 @@
 
   //Instantiate a new renderer and set its size
   const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(width, height);
 
   //Add the renderer to the DOM
   document.getElementById("container3D").appendChild(renderer.domElement);
@@ -191,9 +195,9 @@
 
   //Add a listener to the window, so we can resize the window and the camera
   window.addEventListener("resize", function () {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(width, height);
   });
 
   /* renderer.domElement.addEventListener('resize', () => {
@@ -235,7 +239,7 @@
             {
               x: bodyPartsModels[2].position.x,
               y: bodyPartsModels[2].position.y,
-              z: 0.75,
+              z: 0.55,
             },
             { x: 0, y: 0, z: 0 }
           );
@@ -247,7 +251,7 @@
             {
               x: bodyPartsModels[1].position.x,
               y: bodyPartsModels[1].position.y,
-              z: 0.75,
+              z: 0.55,
             },
             { x: 0, y: 0, z: 0 }
           );
@@ -355,6 +359,27 @@
       }
     }
   }
+
+
+  renderer.domElement.addEventListener('click', onDocumentMouseClick, false);
+
+  function onDocumentMouseClick(event) {
+    event.preventDefault();
+
+    mouse.x = ((event.clientX - renderer.domElement.offsetLeft) / renderer.domElement.clientWidth) * 2 - 1;
+    mouse.y = -((event.clientY - renderer.domElement.offsetTop) / renderer.domElement.clientHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    var intersects = raycaster.intersectObjects(bodyPartsModels, true);
+
+    console.log(intersects);
+    if (intersects.length > 0) {
+       
+           console.log("click on object")
+          
+    }
+}
 
   //Start the 3D rendering
   animate();

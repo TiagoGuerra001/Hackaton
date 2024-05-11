@@ -11,7 +11,11 @@
 <body>
 
     <div layout:fragment="content">
-        <div th:include="Homepage/canvas.html" th:with="modelId='body.gltf,brain/brain.gltf,heart/heart.gltf'"></div>
+        <div th:include="Homepage/canvas.html" 
+            th:with="modelId='body.gltf,brain/brain.gltf,heart/heart.gltf', 
+            modelWidth=1000, 
+            modelHeight=750">
+        </div>
     </div>
 
     <th:block layout:fragment="script">
