@@ -68,25 +68,40 @@
           .round-button:hover.active {
             filter: brightness(1.2);
           }
+
+          .quizzes-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+          }
+
+          .quizzes-list div:nth-child(odd) {
+            margin-right: 10rem;
+          }
+
+          .quizzes-list div:nth-child(even) {
+            margin-left: 10rem;
+          }
         </style>
 
         <!-- Button Path-->
         <div style="display: flex; justify-content: center; width: 100%">
-          <div style="flex-direction: row">
+          <div class="quizzes-list">
             <div>
-              <button id="button1" class="round-button active" style="margin-top: 60px"></button>
+              <button id="button1" class="round-button active"></button>
             </div>
             <div>
-              <button id="button2" class="round-button" style="margin-top: 60px; margin-left: 80px"></button>
+              <button id="button2" class="round-button"></button>
             </div>
             <div>
-              <button id="button3" class="round-button" style="margin-top: 60px; margin-left: 160px"></button>
+              <button id="button3" class="round-button"></button>
             </div>
             <div>
-              <button id="button4" class="round-button" style="margin-top: 60px; margin-left: 80px"></button>
+              <button id="button4" class="round-button"></button>
             </div>
             <div>
-              <button id="button5" class="round-button" style="margin-top: 60px"></button>
+              <button id="button5" class="round-button"></button>
             </div>
           </div>
         </div>
