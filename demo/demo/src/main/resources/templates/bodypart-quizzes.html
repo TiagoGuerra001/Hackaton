@@ -42,20 +42,21 @@
                 border: none;  
                 box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
                 cursor: not-allowed; 
-                background-image: url('/static/lock.png');
+                background-image: url('/images/icons/lock.png');
+                background-size: 30%;
                 background-position: center;
                 background-repeat: no-repeat;
             }
 
             .round-button.active {
                 background-color: #50e820;
-                background-image: url('/icons/star.png');
+                background-image: url('/images/icons/star.png');
                 cursor: pointer; 
             }
 
             .round-button.done {
                 background-color: #50e820; 
-                background-image: url('/icons/check.png');
+                background-image: url('/images/icons/check.png');
                 cursor: pointer;
             }
 
@@ -67,12 +68,41 @@
         <!-- Button Path-->
         <div style="display:flex;justify-content:center;width:100%;">
             <div style="flex-direction: row;">
-                <div th:each="(id, questions) : ${bodyPartQuestionsMap}"></div>
+                
+                
                 <div>
-                    <button td:href="/bodyPart/{mainPart.id}/quizzes/{id}" id="id" class="round-button active" style="margin-top:60px;"> </button>
-                </div>   
+                    <button id="button1" class="round-button active" style="margin-top:60px;"> </button>
+                </div> 
+                <div>
+                    <button id="button2" class="round-button" style="margin-top:60px;margin-left:80px;"> </button>
+                </div>
+                <div>
+                    <button id="button3" class="round-button" style="margin-top:60px;margin-left:160px;"> </button>
+                </div>
+                <div>
+                    <button id="button4" class="round-button" style="margin-top:60px;margin-left:80px;"> </button>
+                </div>
+                <div>
+                    <button id="button5" class="round-button" style="margin-top:60px;"> </button>
+                </div>
             </div>
         </div>
     </div>
   </body>
+  <script>
+        const buttons = document.querySelectorAll('.round-button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (!button.classList.contains('done')) {
+                    if (button.classList.contains('active')) {
+                        button.classList.remove('active');
+                        button.classList.add('done');
+                    } else {
+                        button.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
 </html>
