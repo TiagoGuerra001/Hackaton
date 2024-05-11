@@ -37,6 +37,7 @@
         data-accordion="false"
         data-widget="treeview"
         role="menu"
+        th:each="mainPart : ${mainParts}"
       >
         <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
@@ -101,11 +102,14 @@
                     </a>
                 </li> -->
 
-                <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"><i class="fa fa-bell"></i> Head</button>
+                <!-- FIXME: Fix data-body-part -->
+                <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"><i class="fa fa-bell"></i> <p th:text="${mainPart.name}"></p></button>
 
-                <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item" data-body-part="middle"><i class="fa fa-bell"></i> Torso</button>
+                <!-- <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"><i class="fa fa-bell"></i> <p>Head</p></button>
 
-                <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item" data-body-part="bottom"><i class="fa fa-bell"></i> Toes</button>
+                <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item" data-body-part="middle"><i class="fa fa-bell"></i> <p>Torso</p></button>
+
+                <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item" data-body-part="bottom"><i class="fa fa-bell"></i> <p>Toes</p></button> -->
 
 
                 <!-- <li class="nav-item ">
