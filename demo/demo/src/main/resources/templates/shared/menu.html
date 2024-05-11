@@ -10,8 +10,10 @@
   const changeValue = (e) => {
     console.log("Clicked ", e);
     const elem = e.getAttribute('data-body-part');
+    const elemName = e.getAttribute('data-body-part-name');
     const elemInfo = e.getAttribute('data-body-part-info');
     localStorage.setItem('selectedPart', elem);
+    localStorage.setItem('selectedPartName', elemName);
     localStorage.setItem('selectedPartInfo', elemInfo);
   }
 
@@ -119,7 +121,7 @@
                 class="btn btn-outline-primary btn-block body-part-nav-item " 
                 data-body-part="upper"
                 data-body-part-info=""
-                th:attr="data-body-part=${mainPart.name}, data-body-part-info=${mainPart.info}"
+                th:attr="data-body-part=${mainPart.id}, data-body-part-name=${mainPart.name}, data-body-part-info=${mainPart.info}"
                
                 onclick="changeValue(this)">
                   <i class="fa fa-bell"></i> 

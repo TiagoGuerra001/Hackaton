@@ -35,17 +35,18 @@
 <script>
   console.log("Part Description");
 
+  let currentPart = "Body Type";
+
   function onclickViewDetails() {
-    console.log("View Details");
+    console.log("View Details of id: ", currentPart);
   }
 
   const myOffcanvas = document.getElementById('part-description');
   console.log("Offcanvas elem: ", myOffcanvas);
   myOffcanvas.addEventListener('show.bs.offcanvas', function () {
     // Add your code here
-    const part = localStorage.getItem('selectedPart');
-    console.log("Selected Part: ", part);
-    myOffcanvas.querySelector('.offcanvas-title').textContent = part;
+    currentPart = localStorage.getItem('selectedPart');
+    myOffcanvas.querySelector('.offcanvas-title').textContent = localStorage.getItem('selectedPartName');
     myOffcanvas.querySelector('.offcanvas-body img').src = "https://via.placeholder.com/150";
     myOffcanvas.querySelector('.offcanvas-part-info').textContent = localStorage.getItem('selectedPartInfo');
   });
