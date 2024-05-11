@@ -13,11 +13,15 @@
     // To allow for importing the .gltf file
     import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 
+    // Get the width and height of the div with id container3D
+    const container3D = document.getElementById("container3D");
+    const width = container3D.clientWidth;
+    const height = container3D.clientHeight;
 
     //Create a Three.JS Scene
     const scene = new THREE.Scene();
     //create a new camera with positions and angles
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, window.width / window.height , 0.1, 1000);
 
     //Keep track of the mouse position, so we can make the eye move
     let mouseX = window.innerWidth / 2;
@@ -65,6 +69,7 @@
 
     //Set how far the camera will be from the 3D model
     camera.position.z = 2.5;
+    camera.updateProjectionMatrix();
 
     //Add lights to the scene, so we can actually see the 3D model
     const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
@@ -106,6 +111,20 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
+    /* renderer.domElement.addEventListener('resize', () => {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        if (canvas.width !== width || canvas.height !== height) {
+            // you must pass false here or three.js sadly fights the browser
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+
+            // update any render target sizes here
+        }
+    }); */
+
     const body_parts = document.querySelectorAll('.body-part-nav-item');
     console.log(body_parts);
 
@@ -113,18 +132,23 @@
 
     body_parts.forEach((part) => {
         part.addEventListener('click', (e) => {
+
+            const parentNode = e.target.parentNode;
+            //console.log(parentNode);
+
             part_description_offcanvas.hide();
-            const body_type = e.target.getAttribute('data-body-part');
+
+            const body_type = parentNode.getAttribute('data-body-part-name');
             console.log(body_type);
             switch (body_type) {
-                case 'upper':
+                case 'Brain':
                     //FIXME: Change the position
                     zoomIn(camera, controls, { x: 0, y: 1.25, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
-                case 'middle':
+                case 'Arm':
                     zoomIn(camera, controls, { x: 0, y: 0, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
-                case 'bottom':
+                case 'Feet':
                     zoomIn(camera, controls, { x: 0, y: -1.25, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
                 default:
