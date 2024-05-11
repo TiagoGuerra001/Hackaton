@@ -1,14 +1,9 @@
 package com.example.demo.entity;
 
-import java.util.List;
-
-import org.springframework.context.annotation.Conditional;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -34,7 +29,7 @@ public class UserDAO {
 
     private String password;
 
-    @Column(name = "coins")
+    @Column(nullable = false)
     private int coins;
 
     // @Column(name = "complete") //Information related to the completion of quizzes
