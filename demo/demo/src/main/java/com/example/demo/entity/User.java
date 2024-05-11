@@ -25,9 +25,5 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Email
-    @Column(unique = true, nullable = false)
-    private String email;
-
     private String password;
 }
