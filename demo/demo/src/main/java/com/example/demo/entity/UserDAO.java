@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class UserDAO {
     @Column(name = "coins")
     private int coins;
 
-    // @Column(name = "complete") //Information related to the completion of quizzes
-    // private List<BodyPart> bodyParts;
+    @Column(name = "complete") //Information related to the completion of quizzes
+    @ManyToMany
+    private List<BodyPart> bodyParts;
 }

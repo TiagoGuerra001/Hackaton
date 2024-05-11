@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.UserDAO;
 import com.example.demo.entity.MainPart;
+import com.example.demo.config.QuizForm;
 import com.example.demo.config.UserDataModel;
 import com.example.demo.entity.BodyPart;
 import com.example.demo.entity.Question;
@@ -137,18 +138,97 @@ public class AdminPageController {
         model.addAttribute("bodyPart", bodyPart);
         model.addAttribute("questions", questions);
         model.addAttribute("questionsStrings", questionsStrings);
+        
+        
         return "quizz";
     }
 
     @PostMapping("/bodypart/{mainPartId}/quizzes/{bodyPartId}/submit-quiz")
-    public String submitQuiz(@PathVariable long mainPartId, @PathVariable long bodyPartId, @RequestParam("answers") String[] answers) {
+    public String submitQuiz(@PathVariable long mainPartId, @PathVariable long bodyPartId, QuizForm form) {
         
+        //Cntr questions
+        int cntrQuestions =  0;
+
         // Process submitted quiz data
-        for (int i = 0; i < answers.length; i++) {
-            String answer = answers[i];
-            // Process each question ID and its corresponding answer
-            System.out.println(", Answer: " + answer);
+        var quizForm = form;
+
+        //Question 0
+        Long questionId0 = quizForm.getQuestionId0();
+        Optional<Question> questionOpt0 = QRepository.findById(questionId0);
+        var question0  = questionOpt0.get();
+        if (question0 != null) {
+            String correctAnswer0 = question0.getCorrectAnswer();
+            //Checks if the answer is similar to the correct one
+            if(correctAnswer0.equals(quizForm.getAnswer0())){
+                cntrQuestions ++;
+                System.out.println("correct question");
+            }
+            else{
+                System.out.println("failed question");
+            }
         }
+
+        //Question 1
+        Long questionId1 = quizForm.getQuestionId1();
+        Optional<Question> questionOpt1 = QRepository.findById(questionId1);
+        var question1  = questionOpt1.get();
+        if (question1 != null) {
+            String correctAnswer1 = question1.getCorrectAnswer();
+            //Checks if the answer is similar to the correct one
+            if(correctAnswer1.equals(quizForm.getAnswer1())){
+                cntrQuestions ++;
+                System.out.println("correct question");
+            }
+            else{
+                System.out.println("failed question");
+            }
+        }
+
+        //Question 2
+        Long questionId2 = quizForm.getQuestionId2();
+        Optional<Question> questionOpt2 = QRepository.findById(questionId2);
+        var question2  = questionOpt2.get();
+        if (question2 != null) {
+            String correctAnswer2 = question2.getCorrectAnswer();
+            //Checks if the answer is similar to the correct one
+            if(correctAnswer2.equals(quizForm.getAnswer2())){
+                cntrQuestions ++;
+                System.out.println("correct question");
+            }
+            else{
+                System.out.println("failed question");
+            }
+        }
+
+        if(cntrQuestions == 3){
+            //Change the completed quizzes by the user
+            
+            //Get user
+            UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            UserDAO userDAO = userDAORepository.findByUsername(user.getUsername()).get();
+
+            //Get bodypart
+            Optional<BodyPart> bodyPartOpt = BPRepository.findById(bodyPartId);
+            BodyPart bodyPart = bodyPartOpt.get();
+
+            if (userDAO != null && bodyPart != null) {
+                //Update bodyparts
+                List<BodyPart> userBodyParts = userDAO.getBodyParts();
+                if(!userBodyParts.contains(bodyPart)){
+                    userBodyParts.add(bodyPart);
+                    userDAO.setBodyParts(userBodyParts);
+                }
+
+                //Update coins
+                int coinsInc = 10;
+                int userCoins = userDAO.getCoins();
+                userDAO.setCoins(userCoins + coinsInc);
+
+                //save
+                userDAORepository.save(userDAO);
+            }
+        }
+  
         // Redirect to a result page or return a view name
         return "redirect:/bodypart/"+  mainPartId + "/quizzes";
     }
