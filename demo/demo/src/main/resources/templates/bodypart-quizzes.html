@@ -12,7 +12,24 @@
     <div layout:fragment="content">
       <h2>Quizzes Page</h2>
       <!-- Buttons Section -->
-      <div th:include="buttons_fragment.html"></div>
+      <div class="row" style="justify-content: center">
+            <a
+            th:href="@{'/bodypart/' + ${mainPart.id}}"
+            type="button"
+            class="btn btn-sm bg-gradient-primary"
+            style="margin-right: 10px; width: 120px"
+            >
+            Documents
+        </a>
+            <a
+            th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}"
+            type="button"
+            class="btn btn-sm bg-gradient-primary"
+            style="width: 120px"
+            >
+            Quizzes
+        </a>
+        </div>
       <!-- duolingo path system-->
 
       <style>

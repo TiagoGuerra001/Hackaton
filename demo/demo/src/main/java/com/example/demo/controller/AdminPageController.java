@@ -71,6 +71,7 @@ public class AdminPageController {
 
     @GetMapping("/bodypart/{id}/quizzes")
     public String getQuizzes(Model model, @PathVariable long id) {
+        User user = new User();
         Optional<MainPart> mainPartOpt = MPRepository.findById(id);
         if (mainPartOpt.isPresent()) {
             MainPart mainPart = mainPartOpt.get();
@@ -79,7 +80,7 @@ public class AdminPageController {
             Map<Long, List<Question>> bodyPartQuestionsMap = new HashMap<>();
 
             for (BodyPart bodyPart : bodyParts) {
-                List<Question> questions = bodyPart.getQuestions(); // Assuming there's a method to retrieve questions for a body part
+                List<Question> questions = bodyPart.getQuestions();
                 bodyPartQuestionsMap.put(bodyPart.getId(), questions);
             }
 
