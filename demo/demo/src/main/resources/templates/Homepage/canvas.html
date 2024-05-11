@@ -58,7 +58,7 @@
 
     //Instantiate a new renderer and set its size
     const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    //renderer.setSize(window.innerWidth, window.innerHeight);
 
     //Add the renderer to the DOM
     document.getElementById("container3D").appendChild(renderer.domElement);
@@ -106,6 +106,20 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
+    /* renderer.domElement.addEventListener('resize', () => {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        if (canvas.width !== width || canvas.height !== height) {
+            // you must pass false here or three.js sadly fights the browser
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+
+            // update any render target sizes here
+        }
+    }); */
+
     const body_parts = document.querySelectorAll('.body-part-nav-item');
     console.log(body_parts);
 
@@ -114,17 +128,18 @@
     body_parts.forEach((part) => {
         part.addEventListener('click', (e) => {
             part_description_offcanvas.hide();
+
             const body_type = e.target.getAttribute('data-body-part');
             console.log(body_type);
             switch (body_type) {
-                case 'upper':
+                case 'Brain':
                     //FIXME: Change the position
                     zoomIn(camera, controls, { x: 0, y: 1.25, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
-                case 'middle':
+                case 'Arm':
                     zoomIn(camera, controls, { x: 0, y: 0, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
-                case 'bottom':
+                case 'Feet':
                     zoomIn(camera, controls, { x: 0, y: -1.25, z: 0.75 }, { x: 0, y: 0, z: 0 });
                     break;
                 default:

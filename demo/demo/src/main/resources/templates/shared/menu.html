@@ -1,9 +1,19 @@
 <script>
-    console.log("Menu");
+  /* $(".main-sidebar").ready(function() {
+    $('.body-part-nav-item').click(function() {
+      var name = $(this).data('name');
+      $('#part-description').text(name);
+    });
+  });
+ */
 
-    function head_nav_item_onclick() {
-        console.log("Head Nav Item OnClick");
-    }
+  const changeValue = (e) => {
+    console.log("Clicked ", e);
+    const elem = e.getAttribute('data-body-part');
+    const elemInfo = e.getAttribute('data-body-part-info');
+    localStorage.setItem('selectedPart', elem);
+    localStorage.setItem('selectedPartInfo', elemInfo);
+  }
 
 </script>
 
@@ -102,9 +112,20 @@
                     </a>
                 </li> -->
 
-                <!-- FIXME: Fix data-body-part -->
-                <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"><i class="fa fa-bell"></i> <p th:text="${mainPart.name}"></p></button>
 
+                <!-- FIXME: Fix data-body-part -->
+                <button 
+                type="button" 
+                class="btn btn-outline-primary btn-block body-part-nav-item " 
+                data-body-part="upper"
+                data-body-part-info=""
+                th:attr="data-body-part=${mainPart.name}, data-body-part-info=${mainPart.info}"
+               
+                onclick="changeValue(this)">
+                  <i class="fa fa-bell"></i> 
+                  <p th:text="${mainPart.name}"></p>
+                </button>
+  
                 <!-- <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"><i class="fa fa-bell"></i> <p>Head</p></button>
 
                 <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item" data-body-part="middle"><i class="fa fa-bell"></i> <p>Torso</p></button>
