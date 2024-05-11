@@ -16,7 +16,7 @@
     const scene = new THREE.Scene();
     //create a new camera with positions and angles
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    
+
     //Keep track of the mouse position, so we can make the eye move
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -52,7 +52,7 @@
         }
     );
 
-   
+
 
     //Instantiate a new renderer and set its size
     const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
@@ -88,7 +88,7 @@
     controls.enableZoom = false;
     controls.enablePan = false;
 
-    
+
     //Render the scene
     function animate() {
         requestAnimationFrame(animate);
@@ -103,6 +103,40 @@
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
+
+    const body_parts = document.querySelectorAll('.body-part-nav-item');
+    console.log(body_parts);
+    body_parts.forEach((part) => {
+        part.addEventListener('click', (e) => {
+            const body_type = e.target.getAttribute('data-body-part');
+            console.log(body_type);
+            switch (body_type) {
+                case 'upper':
+                    //FIXME: Change the position
+                    zoomIn(camera, controls, { x: 0, y: 0.5, z: 0 });
+                    break;
+                case 'middle':
+                    zoomIn(camera, controls, { x: 0, y: -0.5, z: 0 });
+                    break;
+                case 'bottom':
+                    zoomIn(camera, controls, { x: -0.5, y: 0, z: 0 });
+                    break;
+                default:
+                    console.log('No body part selected');
+                    break;
+            }
+        });
+    });
+
+    // Zoom the camera to the specified position
+    const zoomIn = (camera, controls, position) => {
+        const target = new THREE.Vector3(position.x, position.y, position.z);
+        controls.target.copy(target);
+        controls.update();
+        camera.position.copy(target.clone().add(new THREE.Vector3(0, 0, 2.5)));
+        console.log(camera.position);
+    }
+
 
     //add mouse position listener, so we can make the eye move
     document.onmousemove = (e) => {

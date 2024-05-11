@@ -1,3 +1,12 @@
+<script>
+    console.log("Menu");
+
+    function head_nav_item_onclick() {
+        console.log("Head Nav Item OnClick");
+    }
+
+</script>
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-primary elevation-4">
     <!-- Brand Logo -->
@@ -27,10 +36,10 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview" role="menu">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                
+
                 <!-- TODO: Get from model the body parts of the human body -->
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="/home">
                         <i class="nav-icon fas fa-th"></i>
                         <p>Home Page (To remove???)</p>
@@ -85,6 +94,27 @@
                     <a class="nav-link" href="/about">
                         <i class="nav-icon fas fa-th"></i>
                         <p>About</p>
+                    </a>
+                </li> -->
+
+                <li class="nav-item body-part-nav-item">
+                    <a class="nav-link" href="#" data-body-part="upper">
+                        <i class="nav-icon fas fa-copy"></i>
+                        Head
+                    </a>
+                </li>
+
+                <li class="nav-item body-part-nav-item">
+                    <a class="nav-link" href="#" data-body-part="middle">
+                        <i class="nav-icon fas fa-copy"></i>
+                        Arm
+                    </a>
+                </li>
+
+                <li class="nav-item body-part-nav-item">
+                    <a class="nav-link" href="#" data-body-part="bottom">
+                        <i class="nav-icon fas fa-copy"></i>
+                        Feet
                     </a>
                 </li>
 

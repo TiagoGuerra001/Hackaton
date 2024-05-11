@@ -1,33 +1,27 @@
 <!DOCTYPE html>
-<html layout:decorate="~{shared/layout}"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html layout:decorate="~{shared/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 
 </head>
+
 <body>
 
-<div layout:fragment="content">
-    <div th:include="Homepage/canvas.html"></div>
-    <!-- <div th:include="Homepage/part-description.html"></div> -->
-    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="part-description" aria-labelledby="offcanvasScrollingLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <p>Try scrolling the rest of the page to see this option in action.</p>
-    </div>
-    </div>
-</div>
+    <div layout:fragment="content">
+        <div th:include="Homepage/canvas.html"></div>
+        <div th:include="Homepage/part-description.html"></div>
 
-<th:block layout:fragment="script">
-    <script>
-      console.log("Home Page");
-    </script>
-</th:block>
+    </div>
+
+    <th:block layout:fragment="script">
+        <script>
+            console.log("Home Page");
+        </script>
+    </th:block>
 
 </body>
+
 </html>
