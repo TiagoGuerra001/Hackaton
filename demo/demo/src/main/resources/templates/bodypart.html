@@ -1,114 +1,80 @@
 <!DOCTYPE html>
-<html
-  layout:decorate="~{shared/layout}"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-  <head>
-    <meta charset="UTF-8" />
-    <title>BodyPart</title>
-  </head>
-  <body>
-    <div layout:fragment="content">
-      <h2>BodyPart Page</h2>
-      <div class="container-fluid">
-        <!-- Buttons Section -->
+<html layout:decorate="~{shared/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-        <!-- buttons_fragment.html -->
-        <div class="row" style="justify-content: center">
-          <a
-            th:href="@{'/bodypart/' + ${mainPart.id}}"
-            type="button"
-            class="btn btn-sm bg-gradient-primary"
-            style="margin-right: 10px; width: 120px"
-          >
-            Documents
-          </a>
-          <a
-            th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}"
-            type="button"
-            class="btn btn-sm bg-gradient-primary"
-            style="width: 120px"
-          >
-            Quizzes
-          </a>
+<head>
+  <meta charset="UTF-8" />
+  <title>BodyPart</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <h2>BodyPart Page</h2>
+    <div class="container-fluid">
+      <!-- Buttons Section -->
+
+      <!-- buttons_fragment.html -->
+      <div class="row" style="justify-content: center">
+        <a th:href="@{'/bodypart/' + ${mainPart.id}}" type="button" class="btn btn-sm bg-gradient-primary"
+          style="margin-right: 10px; width: 120px">
+          Documents
+        </a>
+        <a th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}" type="button" class="btn btn-sm bg-gradient-primary"
+          style="width: 120px">
+          Quizzes
+        </a>
+      </div>
+      <div class="row" style="margin-top: 10px; height: 80vh">
+        <!-- BodyPart 3D model -->
+        <div class="col" style="width: 50%">
+          <div th:include="Homepage/canvas.html" th:with="modelId='brain/brain'" class="centered-div"></div>
         </div>
-        <div class="row" style="margin-top: 10px; height: 80vh">
-          <!-- BodyPart 3D model -->
-          <div class="col" style="width: 50%">
-            <div
-              th:include="Homepage/canvas.html"
-              th:with="modelId='brain/brain'"
-              class="centered-div"
-            ></div>
-          </div>
 
-          <!-- Dropdow elements section -->
-          <div class="col" style="align-content: center">
-            <div
-              class="card card-success"
-              style="
+        <!-- Dropdow elements section -->
+        <div class="col" style="align-content: center">
+          <div class="card card-success" style="
                 transition: all 0.15s ease 0s;
                 height: inherit;
                 width: inherit;
-              "
-            >
-              <div class="card-header">
-                <h3 class="card-title" th:text="${mainPart.name}"></h3>
+              ">
+            <div class="card-header">
+              <h3 class="card-title" th:text="${mainPart.name}"></h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <p th:text="${mainPart.info}"></p>
+            </div>
+          </div>
+
+          <div th:each="bodyPart : ${bodyParts}">
+            <!-- Display each parameter -->
+            <div class="card collapsed-card">
+              <div class="card-header" th:style="'background-color: ' + ${bodyPart.color} + ' ;'">
+                <h3 class="card-title" th:text="${bodyPart.name}"></h3>
                 <div class="card-tools">
-                  <button
-                    type="button"
-                    class="btn btn-tool"
-                    data-card-widget="maximize"
-                  >
+                  <button type="button" class="btn btn-tool" data-card-widget="maximize">
                     <i class="fas fa-expand"></i>
                   </button>
-                  <button
-                    type="button"
-                    class="btn btn-tool"
-                    data-card-widget="collapse"
-                  >
-                    <i class="fas fa-minus"></i>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-plus"></i>
                   </button>
                 </div>
               </div>
               <div class="card-body">
-                <p th:text="${mainPart.info}"></p>
-              </div>
-            </div>
-
-            <div th:each="bodyPart : ${bodyParts}">
-              <!-- Display each parameter -->
-              <div class="card collapsed-card">
-                <div
-                  class="card-header"
-                  th:style="'background-color: ' + ${bodyPart.color} + ' ;'"
-                >
-                  <h3 class="card-title" th:text="${bodyPart.name}"></h3>
-                  <div class="card-tools">
-                    <button
-                      type="button"
-                      class="btn btn-tool"
-                      data-card-widget="maximize"
-                    >
-                      <i class="fas fa-expand"></i>
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-tool"
-                      data-card-widget="collapse"
-                    >
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <p th:text="${bodyPart.info}"></p>
-                </div>
+                <p th:text="${bodyPart.info}"></p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

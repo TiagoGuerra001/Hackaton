@@ -1,13 +1,27 @@
 package com.example.demo.controller;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.config.UserDataModel;
+import com.example.demo.entity.UserDAO;
 
 @Controller
 public class WebPageController {
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        // i want to get the authenticated user here using the securiry context
+        UserDataModel user = (UserDataModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDAO userDAO = new UserDAO();
+        userDAO.setUsername(user.getUsername());
+        userDAO.setEmail(user.getEmail());
+        userDAO.setPassword(user.getPassword());
+        model.addAttribute("userEnter", userDAO);
+
         return "home";
     }
 
@@ -25,7 +39,6 @@ public class WebPageController {
     public String getMethodName() {
         return "dashboard";
     }
-        
 
     @RequestMapping("/contact")
     public String contact() {
