@@ -6,13 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.repository.MainPartRepository;
 import com.example.demo.repository.BodyPartRepository;
+import com.example.demo.repository.QuestionsRepository;
 
 import com.example.demo.entity.MainPart;
 import com.example.demo.entity.BodyPart;
 import com.example.demo.entity.Question;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,6 +23,8 @@ public class MainBodyPartService {
     private MainPartRepository mainBodyPartRepository;
     @Autowired
     private BodyPartRepository bodyPartRepository;
+    @Autowired
+    private QuestionsRepository questionRepository;
 
     public void populateDatabase() {
         // Create a MainPart
@@ -34,41 +36,40 @@ public class MainBodyPartService {
         BodyPart cortex = new BodyPart();
         cortex.setName("Cortex");
         cortex.setInfo("Stuff about the cortex.");
-        cortex.setInfo("#00FF00");
+        cortex.setColor("#00FF00");
         cortex.setMainPart(brain);
 
         BodyPart FrontLobe = new BodyPart();
         FrontLobe.setName("Front Lobe");
         FrontLobe.setInfo("Stuff about the Front Lobe.");
-        FrontLobe.setInfo("#FF0000");
+        FrontLobe.setColor("#FF0000");
         FrontLobe.setMainPart(brain);
 
         BodyPart Cerebellum = new BodyPart();
         Cerebellum.setName("Cerebellum");
         Cerebellum.setInfo("Stuff about the Cerebellum.");
-        FrontLobe.setInfo("#0000FF");
+        FrontLobe.setColor("#0000FF");
         Cerebellum.setMainPart(brain);
 
         // Create a Question
-        List<String> questions = new ArrayList<>();
-        questions.add("wrong");
-        questions.add("wong");
-        questions.add("wrong");
+        List<String> questionsStrings = new ArrayList<>();
+        questionsStrings.add("wrong");
+        questionsStrings.add("wong");
+        questionsStrings.add("wrong");
         Question question1 = new Question();
         question1.setDifficulty(1);
-        question1.setWrongAnswers(questions);
+        question1.setWrongAnswers(questionsStrings);
         question1.setCorrectAnswer("right");
 
         Question question2 = new Question();
         question2.setDifficulty(1);
-        question2.setWrongAnswers(questions);
+        question2.setWrongAnswers(questionsStrings);
         question2.setCorrectAnswer("right");
 
         Question question3 = new Question();
         question3.setDifficulty(1);
-        question3.setWrongAnswers(questions);
+        question3.setWrongAnswers(questionsStrings);
         question3.setCorrectAnswer("right");
-
 
         //save mainpart
         List<BodyPart> bodyParts = new ArrayList<>();
@@ -79,13 +80,19 @@ public class MainBodyPartService {
         mainBodyPartRepository.save(brain);
 
         //save bodypart
-        
+        List<Question> questions = new ArrayList<>();
+        questions.add(question1);
+        questions.add(question2);
+        questions.add(question3);
+        cortex.setQuestions(questions);
         bodyPartRepository.save(cortex);
         bodyPartRepository.save(FrontLobe);
         bodyPartRepository.save(Cerebellum);
 
         //save questions
-        
+        questionRepository.save(question1);
+        questionRepository.save(question2);
+        questionRepository.save(question3);
         
     }
 }

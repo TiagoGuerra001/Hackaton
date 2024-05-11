@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html
+  layout:decorate="~{shared/layout}"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quizzes</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <h2>Quizzes Page</h2>
+
+      <!-- Buttons Section -->
+      <div href="#" class="row" style="justify-content: center">
+        <button
+          type="button"
+          class="btn btn-sm bg-gradient-primary"
+          style="margin-right: 10px"
+        >
+          Documents
+        </button>
+        <button
+          th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}"
+          type="button"
+          class="btn btn-sm bg-gradient-primary"
+        >
+          Quizzes
+        </button>
+      </div>
+
+        <!-- duolingo path system-->
+        <div>
+
+
+        </div>
+    </div>
+  </body>
+</html>

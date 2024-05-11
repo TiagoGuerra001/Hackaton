@@ -4,9 +4,11 @@ package com.example.demo.controller;
 import com.example.demo.entity.User;
 import com.example.demo.entity.MainPart;
 import com.example.demo.entity.BodyPart;
+import com.example.demo.entity.Question;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.MainPartRepository;
 import com.example.demo.repository.BodyPartRepository;
+import com.example.demo.repository.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional; 
 
 @Controller
@@ -26,6 +31,8 @@ public class AdminPageController {
     private MainPartRepository MPRepository;
     @Autowired
     private BodyPartRepository BPRepository;
+    @Autowired
+    private QuestionsRepository QRepository;
 
     @GetMapping({ "/user/list", "/admin/user" })
     public String listUser() {
@@ -63,14 +70,23 @@ public class AdminPageController {
     }
 
     @GetMapping("/bodypart/{id}/quizzes")
-    public String getQuizzes(Model model, @PathVariable long id)  {    
-        Optional<MainPart> mainPartopt = MPRepository.findById(id);
-        var mainPart = mainPartopt.get();
-        if (mainPart != null) {
+    public String getQuizzes(Model model, @PathVariable long id) {
+        Optional<MainPart> mainPartOpt = MPRepository.findById(id);
+        if (mainPartOpt.isPresent()) {
+            MainPart mainPart = mainPartOpt.get();
+            List<BodyPart> bodyParts = mainPart.getBodyParts();
+
+            Map<Long, List<Question>> bodyPartQuestionsMap = new HashMap<>();
+
+            for (BodyPart bodyPart : bodyParts) {
+                List<Question> questions = bodyPart.getQuestions(); // Assuming there's a method to retrieve questions for a body part
+                bodyPartQuestionsMap.put(bodyPart.getId(), questions);
+            }
+
             model.addAttribute("mainPart", mainPart);
-            model.addAttribute("bodyParts", mainPart.getBodyParts());
+            model.addAttribute("bodyParts", bodyParts);
+            model.addAttribute("bodyPartQuestionsMap", bodyPartQuestionsMap);
         }
         return "bodypart-quizzes";
     }
-
 }
