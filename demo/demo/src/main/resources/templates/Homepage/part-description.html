@@ -8,27 +8,18 @@
   </div>
 </aside> -->
 
-<script>
-  console.log("Part Description");
-
-  function onclickViewDetails() {
-    console.log("View Details");
-  }
-
-</script>
-
 <div class="offcanvas offcanvas-end" tabindex="-1" id="part-description" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">
       Body Type (CHANGE)
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" id="ResetModel"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" ></button>
   </div>
   <div class="offcanvas-body w-100 d-flex flex-column p-4 gap-4">
     <div class="w-100">
       <img src="" alt="Body Type Image">
     </div>
-    <div class="w-100">
+    <div class="w-100 offcanvas-part-info">
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro eveniet cupiditate atque beatae recusandae ratione
       cum harum quo, animi sequi ducimus illo delectus perferendis, eius reprehenderit dolor corporis repellat optio?
     </div>
@@ -40,3 +31,27 @@
     </div>
   </div>
 </div>
+
+<script>
+  console.log("Part Description");
+
+  let currentPart = "Body Type";
+
+  function onclickViewDetails() {
+    console.log("View Details of id: ", currentPart);
+    window.location.href = "bodypart/" + currentPart;
+  }
+
+  const myOffcanvas = document.getElementById('part-description');
+  console.log("Offcanvas elem: ", myOffcanvas);
+  myOffcanvas.addEventListener('show.bs.offcanvas', function () {
+    // Add your code here
+    currentPart = localStorage.getItem('selectedPart');
+    myOffcanvas.querySelector('.offcanvas-title').textContent = localStorage.getItem('selectedPartName');
+    myOffcanvas.querySelector('.offcanvas-body img').src = "https://via.placeholder.com/150";
+    myOffcanvas.querySelector('.offcanvas-part-info').textContent = localStorage.getItem('selectedPartInfo');
+  });
+
+
+
+</script>
