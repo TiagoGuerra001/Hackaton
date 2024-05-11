@@ -48,6 +48,12 @@ public class WebPageController {
         return "login";
     }
 
+    @GetMapping("/shop")
+    public String shop() {
+        return "shop";
+    }
+    
+
     @GetMapping("/register")
     public String register() {
         return "register";
