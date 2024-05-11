@@ -1,16 +1,18 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.repository.MainPartRepository;
 import com.example.demo.repository.BodyPartRepository;
 import com.example.demo.repository.QuestionsRepository;
-
+import com.example.demo.repository.UserDAORepository;
 import com.example.demo.entity.MainPart;
 import com.example.demo.entity.BodyPart;
 import com.example.demo.entity.Question;
+import com.example.demo.entity.UserDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +27,19 @@ public class MainBodyPartService {
     private BodyPartRepository bodyPartRepository;
     @Autowired
     private QuestionsRepository questionRepository;
+    @Autowired
+    private UserDAORepository userDAORepository;
+    // get passwordencoder
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void populateDatabase() {
+        // create user
+        UserDAO user = new UserDAO();
+        user.setUsername("admin");
+        user.setPassword(passwordEncoder.encode("admin"));
+        user.setEmail("1@1");
+        userDAORepository.save(user);
         // Create a MainPart
         MainPart brain = new MainPart();
         brain.setName("Brain");
@@ -71,7 +84,7 @@ public class MainBodyPartService {
         question3.setWrongAnswers(questionsStrings);
         question3.setCorrectAnswer("right");
 
-        //save mainpart
+        // save mainpart
         List<BodyPart> bodyParts = new ArrayList<>();
         bodyParts.add(cortex);
         bodyParts.add(FrontLobe);
@@ -79,7 +92,7 @@ public class MainBodyPartService {
         brain.setBodyParts(bodyParts);
         mainBodyPartRepository.save(brain);
 
-        //save bodypart
+        // save bodypart
         List<Question> questions = new ArrayList<>();
         questions.add(question1);
         questions.add(question2);
@@ -89,7 +102,7 @@ public class MainBodyPartService {
         bodyPartRepository.save(FrontLobe);
         bodyPartRepository.save(Cerebellum);
 
-        //save questions
+        // save questions
         questionRepository.save(question1);
         questionRepository.save(question2);
         questionRepository.save(question3);
