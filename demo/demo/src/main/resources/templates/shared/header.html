@@ -122,23 +122,25 @@
             <!-- TODO: Get User Model -->
             <a aria-expanded="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                 <img alt="User Image" class="user-image img-circle elevation-2"
-                    src="/webjars/AdminLTE/3.2.0/dist/img/user2-160x160.jpg">
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                    src="https://openseauserdata.com/files/0eb4a13bf041f58745649fb7ccab4eb2.jpg">
+                <!-- <span class="d-none d-md-inline">Alexander Pierce</span> -->
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
-                <li class="user-header bg-primary">
+                <li class="user-header bg-light">
                     <img alt="User Image" class="img-circle elevation-2"
-                        src="/webjars/AdminLTE/3.2.0/dist/img/user2-160x160.jpg">
+                        src="https://openseauserdata.com/files/0eb4a13bf041f58745649fb7ccab4eb2.jpg">
 
-                    <p>
-                        Alexander Pierce - Web Developer
-                        <small>Member since Nov. 2012</small>
-                    </p>
+
                 </li>
                 <!-- Menu Body -->
                 <li class="user-body">
-                    <div class="row">
+                    <p class="text-center d-flex flex-column">
+                        {name}
+                        <!-- <small>Member since Nov. 2012</small> -->
+                        <small>{email}</small>
+                    </p>
+                    <!-- <div class="row">
                         <div class="col-4 text-center">
                             <a href="#">Followers</a>
                         </div>
@@ -148,7 +150,7 @@
                         <div class="col-4 text-center">
                             <a href="#">Friends</a>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- /.row -->
                 </li>
                 <!-- Menu Footer-->
@@ -163,11 +165,11 @@
                 <i class="fas fa-th-large"></i>
                 Toggle Right Sidebar
             </a> -->
-            <a class="nav-link" data-bs-toggle="offcanvas" href="#part-description" role="button"
+            <!-- <a class="nav-link" data-bs-toggle="offcanvas" href="#part-description" role="button"
                 aria-controls="offcanvasExample">
                 <i class="fas fa-th-large"></i>
                 Toggle Right Sidebar
-            </a>
+            </a> -->
         </li>
     </ul>
 </nav>

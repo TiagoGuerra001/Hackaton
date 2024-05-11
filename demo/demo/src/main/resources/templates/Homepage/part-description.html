@@ -8,14 +8,37 @@
   </div>
 </aside> -->
 
+<th:block layout:fragment="script">
+  <script>
+    console.log("Part Description");
 
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="part-description"
-  aria-labelledby="offcanvasScrollingLabel">
+    function onclickViewDetails() {
+      console.log("View Details");
+    }
+
+  </script>
+</th:block>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="part-description" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+      Body Type (CHANGE)
+    </h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
-    <p>Try scrolling the rest of the page to see this option in action.</p>
+  <div class="offcanvas-body w-100 d-flex flex-column p-4 gap-4">
+    <div class="w-100">
+      <img src="" alt="Body Type Image">
+    </div>
+    <div class="w-100">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro eveniet cupiditate atque beatae recusandae ratione
+      cum harum quo, animi sequi ducimus illo delectus perferendis, eius reprehenderit dolor corporis repellat optio?
+    </div>
+    <div class="w-100">
+      <!-- TODO: redirect to the body part page -->
+      <button type="button" class="btn btn-primary" onclick="onclickViewDetails()">
+        View Details
+      </button>
+    </div>
   </div>
 </div>

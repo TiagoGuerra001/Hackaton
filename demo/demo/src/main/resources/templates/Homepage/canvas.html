@@ -106,8 +106,12 @@
 
     const body_parts = document.querySelectorAll('.body-part-nav-item');
     console.log(body_parts);
+
+    const part_description_offcanvas = new bootstrap.Offcanvas('#part-description')
+
     body_parts.forEach((part) => {
         part.addEventListener('click', (e) => {
+            part_description_offcanvas.hide();
             const body_type = e.target.getAttribute('data-body-part');
             console.log(body_type);
             switch (body_type) {
@@ -125,6 +129,7 @@
                     console.log('No body part selected');
                     break;
             }
+            part_description_offcanvas.show();
         });
     });
 
