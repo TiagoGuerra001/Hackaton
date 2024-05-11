@@ -21,6 +21,12 @@ public class WebPageController {
         return "register";
     }
 
+    @GetMapping("/home")
+    public String getMethodName() {
+        return "home";
+    }
+        
+
     @RequestMapping("/contact")
     public String contact() {
         return "contact";
