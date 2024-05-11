@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Conditional;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,9 @@ public class UserDAO {
     private String email;
 
     private String password;
+
+    @Column(name = "coins")
+    private int coins;
 
     // @Column(name = "complete") //Information related to the completion of quizzes
     // private List<BodyPart> bodyParts;

@@ -13,12 +13,14 @@ public class UserDataModel implements UserDetails {
     private String username;
     private String password;
     private String email;
+    private int coins;
     private List<GrantedAuthority> authorities;
 
     public UserDataModel(UserDAO user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.email = user.getEmail();
+        this.coins = user.getCoins();
 
         this.authorities = List.of((GrantedAuthority) () -> "ROLE_USER");
     }

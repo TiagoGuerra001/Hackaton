@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -8,9 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import com.example.demo.config.UserDataModel;
+import com.example.demo.entity.MainPart;
 import com.example.demo.entity.UserDAO;
+import com.example.demo.repository.MainPartRepository;
 
 @Controller
 public class WebPageController {
@@ -31,6 +34,9 @@ public class WebPageController {
         userDAO.setEmail(user.getEmail());
         userDAO.setPassword(user.getPassword());
         model.addAttribute("userEnter", userDAO);
+        for (MainPart mainPart : mainParts) {
+            model.addAttribute(mainPart.getName(), mainPart.getInfo());
+        }
 
         return "home";
     }

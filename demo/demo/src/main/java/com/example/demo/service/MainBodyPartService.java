@@ -72,17 +72,20 @@ public class MainBodyPartService {
         Question question1 = new Question();
         question1.setDifficulty(1);
         question1.setWrongAnswers(questionsStrings);
-        question1.setCorrectAnswer("right");
+        question1.setCorrectAnswer("right1");
+        question1.setBodyPart(cortex);
 
         Question question2 = new Question();
         question2.setDifficulty(1);
         question2.setWrongAnswers(questionsStrings);
-        question2.setCorrectAnswer("right");
+        question2.setCorrectAnswer("right2");
+        question2.setBodyPart(cortex);
 
         Question question3 = new Question();
         question3.setDifficulty(1);
         question3.setWrongAnswers(questionsStrings);
-        question3.setCorrectAnswer("right");
+        question3.setCorrectAnswer("right3");
+        question3.setBodyPart(cortex);
 
         // save mainpart
         List<BodyPart> bodyParts = new ArrayList<>();
@@ -106,7 +109,7 @@ public class MainBodyPartService {
         questionRepository.save(question1);
         questionRepository.save(question2);
         questionRepository.save(question3);
-        
+
         // Create another MainPart Arm
         MainPart arm = new MainPart();
         arm.setName("Arm");
@@ -137,19 +140,22 @@ public class MainBodyPartService {
         Question question4 = new Question();
         question4.setDifficulty(1);
         question4.setWrongAnswers(questionsStrings2);
-        question4.setCorrectAnswer("right");
+        question4.setCorrectAnswer("right4");
+        question4.setBodyPart(cortex);
 
         Question question5 = new Question();
         question5.setDifficulty(1);
         question5.setWrongAnswers(questionsStrings2);
-        question5.setCorrectAnswer("right");
+        question5.setCorrectAnswer("right5");
+        question5.setBodyPart(cortex);
 
         Question question6 = new Question();
         question6.setDifficulty(1);
         question6.setWrongAnswers(questionsStrings2);
-        question6.setCorrectAnswer("right");
+        question6.setCorrectAnswer("right6");
+        question6.setBodyPart(cortex);
 
-        //save mainpart
+        // save mainpart
         List<BodyPart> bodyParts2 = new ArrayList<>();
         bodyParts2.add(bicep);
         bodyParts2.add(tricep);
@@ -157,7 +163,7 @@ public class MainBodyPartService {
         arm.setBodyParts(bodyParts2);
         mainBodyPartRepository.save(arm);
 
-        //save bodypart
+        // save bodypart
         List<Question> questions2 = new ArrayList<>();
         questions2.add(question4);
         questions2.add(question5);
@@ -167,11 +173,10 @@ public class MainBodyPartService {
         bodyPartRepository.save(tricep);
         bodyPartRepository.save(forearm);
 
-        //save questions
+        // save questions
         questionRepository.save(question4);
         questionRepository.save(question5);
         questionRepository.save(question6);
-
 
     }
 }

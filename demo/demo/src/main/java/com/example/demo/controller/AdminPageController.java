@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Collections;
 
 @Controller
 public class AdminPageController {
@@ -110,17 +112,18 @@ public class AdminPageController {
     public String getQuiz(Model model, @PathVariable long mainPartId, @PathVariable long bodyPartId) {
         Optional<MainPart> mainPartOpt = MPRepository.findById(mainPartId);
         Optional<BodyPart> bodyPartOpt = BPRepository.findById(bodyPartId);
-        if (mainPartOpt.isPresent()) {
-            MainPart mainPart = mainPartOpt.get();
-            BodyPart bodyPart = bodyPartOpt.get();
+        // ...
 
-            List<Question> questions = bodyPart.getQuestions(); // Assuming there's a method to retrieve questions for a
-                                                                // body part
+        MainPart mainPart = mainPartOpt.get();
+        BodyPart bodyPart = bodyPartOpt.get();
 
-            model.addAttribute("mainPart", mainPart);
-            model.addAttribute("bodyPart", bodyPart);
-            model.addAttribute("questions", questions);
-        }
+        List<Question> questions = bodyPart.getQuestions();
+        Collections.shuffle(questions);
+        questions = questions.subList(0, 3);
+
+        model.addAttribute("mainPart", mainPart);
+        model.addAttribute("bodyPart", bodyPart);
+        model.addAttribute("questions", questions);
         return "quiz";
     }
 }
