@@ -67,21 +67,24 @@ public class MainBodyPartService {
         // Create a Question
         List<String> questionsStrings = new ArrayList<>();
         questionsStrings.add("wrong");
-        questionsStrings.add("wong");
+        questionsStrings.add("wrong");
         questionsStrings.add("wrong");
         Question question1 = new Question();
+        question1.setText("Pergunta numero 1:");
         question1.setDifficulty(1);
         question1.setWrongAnswers(questionsStrings);
         question1.setCorrectAnswer("right1");
         question1.setBodyPart(cortex);
 
         Question question2 = new Question();
+        question2.setText("Pergunta numero 2:");
         question2.setDifficulty(1);
         question2.setWrongAnswers(questionsStrings);
         question2.setCorrectAnswer("right2");
         question2.setBodyPart(cortex);
 
         Question question3 = new Question();
+        question3.setText("Pergunta numero 3:");
         question3.setDifficulty(1);
         question3.setWrongAnswers(questionsStrings);
         question3.setCorrectAnswer("right3");
@@ -135,21 +138,24 @@ public class MainBodyPartService {
         // Create a Question
         List<String> questionsStrings2 = new ArrayList<>();
         questionsStrings2.add("wrong");
-        questionsStrings2.add("wong");
+        questionsStrings2.add("wrong");
         questionsStrings2.add("wrong");
         Question question4 = new Question();
+        question4.setText("Pergunta numero 4:");
         question4.setDifficulty(1);
         question4.setWrongAnswers(questionsStrings2);
         question4.setCorrectAnswer("right4");
         question4.setBodyPart(cortex);
 
         Question question5 = new Question();
+        question5.setText("Pergunta numero 5:");
         question5.setDifficulty(1);
         question5.setWrongAnswers(questionsStrings2);
         question5.setCorrectAnswer("right5");
         question5.setBodyPart(cortex);
 
         Question question6 = new Question();
+        question6.setText("Pergunta numero 6:");
         question6.setDifficulty(1);
         question6.setWrongAnswers(questionsStrings2);
         question6.setCorrectAnswer("right6");
