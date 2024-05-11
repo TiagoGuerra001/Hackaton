@@ -10,33 +10,15 @@
   <body>
     <div layout:fragment="content">
       <h2>BodyPart Page</h2>
-      <!-- Buttons Section -->
       <div class="container-fluid">
         <!-- Buttons Section -->
-        <div class="row" style="justify-content: center">
-          <button
-            type="button"
-            class="btn btn-sm bg-gradient-primary"
-            style="margin-right: 10px; width: 120px"
-          >
-            Documents
-          </button>
-          <button
-            th:href="'/bodyPart/' + ${mainPart.id} + '/quizzes'"
-            type="button"
-            class="btn btn-sm bg-gradient-primary"
-            style="width: 120px"
-          >
-            Quizzes
-          </button>
-        </div>
-
+        <div th:include="buttons_fragment.html"></div>
         <div class="row" style="margin-top: 10px; height: 80vh">
           <!-- BodyPart 3D model -->
           <div class="col">BODYPART</div>
 
           <!-- Dropdow elements section -->
-          <div class="col bg-info">
+          <div class="col bg-info" style="align-content: center">
             <div
               class="card card-success"
               style="
