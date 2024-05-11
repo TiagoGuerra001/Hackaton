@@ -12,32 +12,38 @@
       <h2>BodyPart Page</h2>
       <div class="container-fluid">
         <!-- Buttons Section -->
-        
+
         <!-- buttons_fragment.html -->
         <div class="row" style="justify-content: center">
-            <a
+          <a
             th:href="@{'/bodypart/' + ${mainPart.id}}"
             type="button"
             class="btn btn-sm bg-gradient-primary"
             style="margin-right: 10px; width: 120px"
-            >
+          >
             Documents
           </a>
-              <a
-              th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}"
-              type="button"
-              class="btn btn-sm bg-gradient-primary"
-              style="width: 120px"
-              >
-              Quizzes
+          <a
+            th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}"
+            type="button"
+            class="btn btn-sm bg-gradient-primary"
+            style="width: 120px"
+          >
+            Quizzes
           </a>
         </div>
         <div class="row" style="margin-top: 10px; height: 80vh">
           <!-- BodyPart 3D model -->
-          <div class="col">BODYPART</div>
+          <div class="col" style="width: 50%">
+            <div
+              th:include="Homepage/canvas.html"
+              th:with="modelId='brain/brain'"
+              class="centered-div"
+            ></div>
+          </div>
 
           <!-- Dropdow elements section -->
-          <div class="col bg-info" style="align-content: center">
+          <div class="col" style="align-content: center">
             <div
               class="card card-success"
               style="
