@@ -68,7 +68,7 @@ public class AdminPageController {
     }
 
     @GetMapping("/bodypart/{id}")
-    public String getBodyPart(Model model, @PathVariable long id) {
+    public String getBodyPart(Model model, @PathVariable Long id) {
         //Access current user
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDAO userDAO = userDAORepository.findByUsername(user.getUsername()).get();
@@ -78,6 +78,7 @@ public class AdminPageController {
         var mainPart = mainPartopt.get();
         if (mainPart != null) {
             model.addAttribute("mainPart", mainPart);
+            model.addAttribute("mainPartName", mainPart.getName().toLowerCase());
             model.addAttribute("bodyParts", mainPart.getBodyParts());
         }
         return "bodypart";
@@ -171,51 +172,24 @@ public class AdminPageController {
         // Process submitted quiz data
         var quizForm = form;
 
-        //Question 0
-        Long questionId0 = quizForm.getQuestionId0();
-        Optional<Question> questionOpt0 = QRepository.findById(questionId0);
-        var question0  = questionOpt0.get();
-        if (question0 != null) {
-            String correctAnswer0 = question0.getCorrectAnswer();
-            //Checks if the answer is similar to the correct one
-            if(correctAnswer0.equals(quizForm.getAnswer0())){
-                cntrQuestions ++;
-                System.out.println("correct question");
-            }
-            else{
-                System.out.println("failed question");
-            }
-        }
+        //Process questions
+        List<Long> questionIds = quizForm.getQuestionIds();
+        List<String> answers = quizForm.getAnswers();
 
-        //Question 1
-        Long questionId1 = quizForm.getQuestionId1();
-        Optional<Question> questionOpt1 = QRepository.findById(questionId1);
-        var question1  = questionOpt1.get();
-        if (question1 != null) {
-            String correctAnswer1 = question1.getCorrectAnswer();
-            //Checks if the answer is similar to the correct one
-            if(correctAnswer1.equals(quizForm.getAnswer1())){
-                cntrQuestions ++;
-                System.out.println("correct question");
-            }
-            else{
-                System.out.println("failed question");
-            }
-        }
+        for (int i = 0; i < questionIds.size(); i++) {
 
-        //Question 2
-        Long questionId2 = quizForm.getQuestionId2();
-        Optional<Question> questionOpt2 = QRepository.findById(questionId2);
-        var question2  = questionOpt2.get();
-        if (question2 != null) {
-            String correctAnswer2 = question2.getCorrectAnswer();
-            //Checks if the answer is similar to the correct one
-            if(correctAnswer2.equals(quizForm.getAnswer2())){
-                cntrQuestions ++;
-                System.out.println("correct question");
-            }
-            else{
-                System.out.println("failed question");
+            Optional<Question> questionOpt = QRepository.findById(questionIds.get(i));
+            var question  = questionOpt.get();
+            if (question != null) {
+                String correctAnswer = question.getCorrectAnswer();
+                //Checks if the answer is similar to the correct one
+                if(correctAnswer.equals(answers.get(i))){
+                    cntrQuestions ++;
+                    System.out.println("correct question");
+                }
+                else{
+                    System.out.println("failed question");
+                }
             }
         }
 
@@ -251,7 +225,4 @@ public class AdminPageController {
         // Redirect to a result page or return a view name
         return "redirect:/bodypart/"+  mainPartId + "/quizzes";
     }
-
-    
-
 }

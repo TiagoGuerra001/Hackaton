@@ -25,9 +25,9 @@
     </div>
     <div class="w-100">
       <!-- TODO: redirect to the body part page -->
-      <button type="button" class="btn btn-primary" onclick="onclickViewDetails()">
+      <a type="button" class="btn btn-primary" onclick="onclickViewDetails()">
         View Details
-      </button>
+      </a>
     </div>
   </div>
 </div>
@@ -35,7 +35,7 @@
 <script>
   console.log("Part Description");
 
-  let currentPart = "Body Type";
+  let currentPart = localStorage.getItem("selectedPartName");
 
   function onclickViewDetails() {
     console.log("View Details of id: ", currentPart);

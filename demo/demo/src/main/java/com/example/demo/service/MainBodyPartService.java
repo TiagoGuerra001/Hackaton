@@ -48,7 +48,10 @@ public class MainBodyPartService {
         // Create a MainPart
         MainPart brain = new MainPart();
         brain.setName("Brain");
-        brain.setInfo("Stuff about the brain.");
+        brain.setInfo("The brain consists of several main parts, including the cerebrum, cerebellum," + 
+        " and brainstem. The cerebrum is responsible for higher functions like thinking and voluntary movement," + 
+        " while the cerebellum coordinates movement and balance. The brainstem controls basic bodily functions "+
+        "like breathing and heartbeat.");
 
         // Create a BodyPart
         BodyPart cortex = new BodyPart();
@@ -106,7 +109,7 @@ public class MainBodyPartService {
         "\n" +
         "Understanding the brain cortex and its functions helps in diagnosing, treating, and managing various neurological and " +
         "psychological conditions.");
-        cortex.setColor("#00FF00");
+        cortex.setColor("#E74C3C");
         cortex.setMainPart(brain);
 
         BodyPart FrontLobe = new BodyPart();
@@ -148,39 +151,48 @@ public class MainBodyPartService {
         "The frontal lobe’s integral role in integrating sensory information and coordinating complex cognitive functions makes it crucial " +
         "for adapting to new situations, modifying behavior in response to new information, and implementing complex plans and strategies."
 );
-        FrontLobe.setColor("#FF0000");
+        FrontLobe.setColor("#3498DB");
         FrontLobe.setMainPart(brain);
 
         BodyPart Cerebellum = new BodyPart();
         Cerebellum.setName("Cerebellum");
         Cerebellum.setInfo("Stuff about the Cerebellum.");
-        FrontLobe.setColor("#0000FF");
+        Cerebellum.setColor("#2ECC71");
         Cerebellum.setMainPart(brain);
 
         // Create a Question
         List<String> questionsStrings = new ArrayList<>();
-        questionsStrings.add("wrong");
-        questionsStrings.add("wrong");
-        questionsStrings.add("wrong");
+        questionsStrings.add("Frontal lobe: balance; Parietal lobe: taste; Temporal lobe: smell; Occipital lobe: touch");
+        questionsStrings.add("Frontal lobe: sleep; Parietal lobe: immune response; Temporal lobe: digestion; Occipital lobe: blood pressure");
+        questionsStrings.add("Frontal lobe: color perception; Parietal lobe: temperature; Temporal lobe: pain; Occipital lobe: hunger");
         Question question1 = new Question();
-        question1.setText("Pergunta numero 1:");
+        question1.setText("Describe the four main lobes of the cerebral cortex and their primary functions.");
         question1.setDifficulty(1);
         question1.setWrongAnswers(questionsStrings);
-        question1.setCorrectAnswer("right1");
+        question1.setCorrectAnswer("Frontal lobe: decision-making; Parietal lobe: sensation; Temporal lobe: hearing; Occipital lobe: vision");
         question1.setBodyPart(cortex);
 
         Question question2 = new Question();
-        question2.setText("Pergunta numero 2:");
+        List<String> questionsStrings2 = new ArrayList<>();
+       
+        questionsStrings2.add("Its single-layered structure simplifies neural processing, enhancing reflex actions.");
+        questionsStrings2.add("Its two-layered architecture helps in basic survival instincts like feeding and fleeing.");
+        questionsStrings2.add("Its five-layered structure supports emotional responses to environmental stimuli.");
+        question2.setText("How does the structure of the neocortex contribute to its functions in higher cognitive processes?");
         question2.setDifficulty(1);
-        question2.setWrongAnswers(questionsStrings);
-        question2.setCorrectAnswer("right2");
+        question2.setWrongAnswers(questionsStrings2);
+        question2.setCorrectAnswer("Its six-layered structure facilitates complex functions like sensory perception, spatial reasoning, and conscious thought.");
         question2.setBodyPart(cortex);
 
         Question question3 = new Question();
-        question3.setText("Pergunta numero 3:");
+        List<String> questionsStrings3 = new ArrayList<>();
+        questionsStrings3.add("Osteoporosis, arthritis, and diabetes: impact bone and glucose metabolism without directly affecting the cortex.");
+        questionsStrings3.add("Myopia, hyperopia, and astigmatism: affect vision by altering the lens but not the cortical processing of visual information.");
+        questionsStrings3.add("Tachycardia, bradycardia, and arrhythmia: involve heart rate and rhythm, not directly related to cortical functions.");
+        question3.setText("What are some common neurological disorders that affect the cortex, and how do they impact human functions?");
         question3.setDifficulty(1);
-        question3.setWrongAnswers(questionsStrings);
-        question3.setCorrectAnswer("right3");
+        question3.setWrongAnswers(questionsStrings3);
+        question3.setCorrectAnswer("Epilepsy, multiple sclerosis, and schizophrenia: alter cortical functions, leading to sensory disturbances, cognitive impairments, and behavioral changes.");
         question3.setBodyPart(cortex);
 
         // save mainpart
@@ -228,31 +240,41 @@ public class MainBodyPartService {
         valve.setInfo("Stuff about the valve.");
         valve.setColor("#0000FF");
 
-        // Create a Question
-        List<String> questionsStrings2 = new ArrayList<>();
-        questionsStrings2.add("wrong");
-        questionsStrings2.add("wrong");
-        questionsStrings2.add("wrong");
+        // Create a Question Atrium
+        List<String> questionsStrings4 = new ArrayList<>();
+        questionsStrings4.add("The atria are primarily responsible for pumping blood out of the heart to the lungs and the rest of the body.");
+        questionsStrings4.add("The atria regulate the heart's electrical impulses and ensure the timing of the heartbeat.");
+        questionsStrings4.add("The atria produce hormones that control blood pressure.");
         Question question4 = new Question();
-        question4.setText("Pergunta numero 4:");
+        question4.setText("What is the main function of the atria in the human heart?");
         question4.setDifficulty(1);
-        question4.setWrongAnswers(questionsStrings2);
-        question4.setCorrectAnswer("right4");
+        question4.setWrongAnswers(questionsStrings4);
+        question4.setCorrectAnswer("The atria receive blood returning to the heart from the body and lungs and then pump it to the ventricles.");
         question4.setBodyPart(atrium);
 
         Question question5 = new Question();
-        question5.setText("Pergunta numero 5:");
+        List<String> questionsStrings5 = new ArrayList<>();
+        questionsStrings5.add("The right atrium receives oxygen-rich blood from the lungs and pumps it to the left ventricle.");
+        questionsStrings5.add("The right atrium receives oxygen-rich blood from the body and pumps it directly to the lungs.");
+        questionsStrings5.add("The right atrium generates the electrical signals that control the heartbeat.");
+        question5.setText("Which of the following best describes the role of the right atrium in heart function?");
         question5.setDifficulty(1);
-        question5.setWrongAnswers(questionsStrings2);
-        question5.setCorrectAnswer("right5");
+        question5.setWrongAnswers(questionsStrings5);
+        question5.setCorrectAnswer("The right atrium receives oxygen-poor blood from the body and pumps it to the right ventricle.");
         question5.setBodyPart(atrium);
 
         Question question6 = new Question();
-        question6.setText("Pergunta numero 6:");
+        List<String> questionsStrings6 = new ArrayList<>();
+        questionsStrings6.add("Myocardial infarction (heart attack)");
+        questionsStrings6.add("Atherosclerosis (artery hardening)");
+        questionsStrings6.add("Hypertension (high blood pressure)?");
+        question6.setText("What common health condition affects the atria and can lead to complications such as stroke?:");
         question6.setDifficulty(1);
-        question6.setWrongAnswers(questionsStrings2);
-        question6.setCorrectAnswer("right6");
+        question6.setWrongAnswers(questionsStrings6);
+        question6.setCorrectAnswer("Atrial fibrillation (Afib)");
         question6.setBodyPart(atrium);
+
+
 
         // save mainpart
         List<BodyPart> bodyParts2 = new ArrayList<>();

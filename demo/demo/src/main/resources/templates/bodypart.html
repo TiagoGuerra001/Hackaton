@@ -39,7 +39,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <div th:include="Homepage/canvas.html" th:with="modelId='brain/brain.gltf', 
+            <div th:include="Homepage/canvas.html" th:with="modelId=${mainPartName + '/' + mainPartName + '.gltf'}, 
             modelWidth=500, 
             modelHeight=500">
             </div>
