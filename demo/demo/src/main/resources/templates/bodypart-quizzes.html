@@ -12,22 +12,22 @@
       chestElement.classList.add('opened');
 
       try {
-          const response = await fetch('/open-chest', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ chestId: chestElement.id }), // Pass the ID to the server
-          });
+        const response = await fetch('/open-chest', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ chestId: chestElement.id }), // Pass the ID to the server
+        });
 
-          if (response.ok) {
-              const result = await response.text();
-              console.log(result); // Display the response from the server
-          } else {
-              console.error('Error opening chest:', response.status);
-          }
+        if (response.ok) {
+          const result = await response.text();
+          console.log(result); // Display the response from the server
+        } else {
+          console.error('Error opening chest:', response.status);
+        }
       } catch (error) {
-          console.error('An error occurred:', error);
+        console.error('An error occurred:', error);
       }
     }
 
@@ -66,24 +66,27 @@
             background-position: center;
             background-repeat: no-repeat;
             pointer-events: none;
+
+            transition: all 0.15s ease-in-out;
           }
 
           .round-button.active {
-            background-color: #50e820;
+            background-color: rgb(13, 110, 253);
             background-image: url("/images/icons/star.png");
             cursor: pointer;
             pointer-events: auto;
           }
 
           .round-button.done {
-            background-color: #50e820;
+            background-color: rgb(13, 161, 253);
             background-image: url("/images/icons/check.png");
             cursor: pointer;
             pointer-events: auto;
           }
 
           .round-button:hover.active {
-            filter: brightness(1.2);
+            /*filter: brightness(2);*/
+            background-color: rgb(13, 202, 240);
           }
 
           .quizzes-list {
@@ -93,15 +96,15 @@
             gap: 30px;
           }
 
-          /* .quizzes-list div:nth-child(odd) {
+          .quizzes-list div:nth-child(odd) {
             margin-right: 10rem;
           }
 
           .quizzes-list div:nth-child(even) {
             margin-left: 10rem;
-          } */
+          }
 
-          .chest{
+          .chest {
             display: inline-block;
             padding: 35px 35px;
             border: none;
@@ -109,9 +112,12 @@
             background-size: 100%;
             background-position: center;
             background-repeat: no-repeat;
+
+            display: flex;
+            justify-content: center;
           }
 
-          .chest.opened{
+          .chest.opened {
             background-image: url("/images/icons/chest-open.png");
             pointer-events: none;
           }
@@ -121,22 +127,27 @@
         <div style="display: flex; justify-content: center; width: 100%">
           <div class="quizzes-list">
             <!-- Quizzes-->
-            <div th:each="bodyPart, bodyPartIndex : ${bodyParts}">
+            <div th:each="bodyPart, bodyPartIndex : ${bodyParts}" class="d-flex flex-column gap-4">
               <!-- Single Quizzes-->
-              <div th:style="'margin-right:' + ${pathMargins[__${bodyPartIndex.index}__]} + 'px;'">
-                <a th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes/' + ${bodyPart.id}}" id="stateIndex.index" th:class="'round-button ' + ${quizStates[__${bodyPartIndex.index}__]}"></a>
-              </div>
+              <!-- <div th:style="'margin-right:' + ${pathMargins[__${bodyPartIndex.index}__]} + 'px;'">
+                <a th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes/' + ${bodyPart.id}}" id="stateIndex.index"
+                  th:class="'round-button ' + ${quizStates[__${bodyPartIndex.index}__]}"></a>
+              </div> -->
               <!-- treasure chest example-->
-              <div>
+              <!-- <div>
                 <a class="chest" th:if="${bodyPartIndex.index % 2 == 0}" onclick="openChest(this)"></a>
-              </div>
+              </div> -->
+
+              <a th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes/' + ${bodyPart.id}}" id="stateIndex.index"
+                th:class="'round-button ' + ${quizStates[__${bodyPartIndex.index}__]}"></a>
+              <a class="chest" th:if="${bodyPartIndex.index % 2 == 0}" onclick="openChest(this)"></a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    
+
   </div>
 </body>
 <script>
