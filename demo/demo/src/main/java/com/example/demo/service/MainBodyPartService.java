@@ -282,19 +282,19 @@ public class MainBodyPartService {
         liver.setName("Liver");
         liver.setInfo("Stuff about the liver.");
         liver.setPrice(10);
-        liver.setImageID("liver");
+        liver.setImageID("liver.png");
 
         Item lungs = new Item();
         lungs.setName("Lungs");
         lungs.setInfo("Stuff about the lungs.");
         lungs.setPrice(20);
-        lungs.setImageID("lungs");
+        lungs.setImageID("lungs.png");
 
         Item stomach = new Item();
         stomach.setName("Stomach");
         stomach.setInfo("Stuff about the stomach.");
         stomach.setPrice(30);
-        stomach.setImageID("stomach");
+        stomach.setImageID("stomach.png");
 
         Item muscleAnat = new Item();
         muscleAnat.setName("Muscle Anatomy");

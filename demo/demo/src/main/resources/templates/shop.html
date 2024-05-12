@@ -24,14 +24,6 @@
             <a class="btn btn-info" data-filter="3">Others</a>
           </div>
           <div class="mb-2">
-
-            <div class="float-left">
-              <div class="d-flex h-100 align-content: center; gap-2">
-                <i class="fa fa-coins"></i>
-                <p th:text="${userCoins}">ola</p>
-              </div>
-            </div>
-
             <div class="float-right">
               <select class="custom-select" style="width: auto" data-sortorder>
                 <option value="asc">Sort by price</option>
@@ -55,26 +47,44 @@
             "
           >
             <!-- Card elements here -->
-            <div class="card" style="width: 18rem">
-              <img src="image-url" class="card-img-top" alt="Item Image" />
-              <div class="card-body">
-                <h5 class="card-title">Item Name</h5>
-                <p class="card-text">Item Description</p>
-                <p class="card-text" id="price-tag" value="10">Price: $10.00</p>
-                <a href="#" class="btn btn-primary" onclick="BuyItem(10)">Buy</a>
+            <div class="row" style="display: flex; flex-wrap: wrap">
+              <div class="col-md-4" th:each="item : ${shopItems}">
+                <div class="card">
+                  <div class="card-header">
+                    <h3
+                      class="card-title text-center"
+                      th:text="${item.name}"
+                    ></h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="img-card">
+                      <img
+                        th:src="'/images/organs/'+${item.imageID}"
+                        alt="Item image"
+                        style="width: 200px; height: 200px"
+                      />
+                    </div>
+                    <div class="item-text">
+                      <p th:text="${item.info}"></p>
+                    </div>
+                    <div class="item-buy">
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <h4 th:text="'Price: ' + ${item.price}"></h4>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          onclick="onclickBuy()"
+                        >
+                          Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="card" style="width: 18rem">
-              <img src="image-url" class="card-img-top" alt="Item Image" />
-              <div class="card-body">
-                <h5 class="card-title">Item Name</h5>
-                <p class="card-text">Item Description</p>
-                <p class="card-text" id="price-tag" value="11">Price: $11.00</p>
-                <a href="#" class="btn btn-primary">Buy</a>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
@@ -82,6 +92,14 @@
 
     <script>
       // JavaScript code here
+      console.log("Shop Page");
+      let currentPart = "";
+
+      function onclickBuy() {
+        console.log("Buyed item!");
+        window.location.href = "/";
+      }
+
       const filterButtons = document.querySelectorAll("[data-filter]");
       const sortSelect = document.querySelector("[data-sortorder]");
       const sortAscButton = document.querySelector("[data-sortasc]");
@@ -122,27 +140,25 @@
         // ...
       });
 
-      
+      // Buy item logic here
+      function BuyItem(price) {
         // Buy item logic here
-        function BuyItem(price) {
-          // Buy item logic here
-          fetch('/update-price', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ price: price })
+        fetch("/update-price", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ price: price }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle the response data
+            console.log(data);
           })
-            .then(response => response.json())
-            .then(data => {
-              // Handle the response data
-              console.log(data);
-            })
-            .catch(error => {
-              // Handle any errors
-              console.error(error);
-            });
-        
+          .catch((error) => {
+            // Handle any errors
+            console.error(error);
+          });
       }
     </script>
   </body>
