@@ -42,7 +42,7 @@ public class MainBodyPartService {
         UserDAO user = new UserDAO();
         user.setUsername("admin");
         user.setPassword(passwordEncoder.encode("admin"));
-        user.setEmail("1@1");
+        user.setEmail("exemplo@ex.pt");
         user.setCoins(70);
         userDAORepository.save(user);
         // Create a MainPart

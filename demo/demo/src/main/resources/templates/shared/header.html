@@ -14,130 +14,37 @@
     </form>
     -->
   <!-- Brand Logo -->
-  <a class="brand-link" href="/">
+  <a href="/" style="text-decoration: none">
     <img
-      alt="AdminLTE Logo"
-      class="brand-image img-circle elevation-3"
-      src="/webjars/AdminLTE/3.2.0/dist/img/AdminLTELogo.png"
-      style="opacity: 0.8"
+      alt="NoU Logo"
+      class="img-circle"
+      src="/logos/logo2.png"
+      style="
+        opacity: 0.8;
+        height: 65px;
+        width: 65px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+      "
     />
-    <span class="">NoU</span>
+    <span
+      style="
+        font-family: 'Peddana', sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+      "
+      >NoU</span
+    >
   </a>
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
-    <!-- Messages Dropdown Menu -->
-    <li class="nav-item dropdown">
-      <!-- <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-comments"></i>
-                <span class="badge badge-danger navbar-badge">3</span>
-            </a> -->
-      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        <a class="dropdown-item" href="#">
-          <!-- Message Start -->
-          <div class="media">
-            <img
-              alt="User Avatar"
-              class="img-size-50 mr-3 img-circle"
-              src="/webjars/AdminLTE/3.2.0/dist/img/user1-128x128.jpg"
-            />
-            <div class="media-body">
-              <h3 class="dropdown-item-title">
-                Brad Diesel
-                <span class="float-right text-sm text-danger"
-                  ><i class="fas fa-star"></i
-                ></span>
-              </h3>
-              <p class="text-sm">Call me whenever you can...</p>
-              <p class="text-sm text-muted">
-                <i class="far fa-clock mr-1"></i> 4 Hours Ago
-              </p>
-            </div>
-          </div>
-          <!-- Message End -->
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">
-          <!-- Message Start -->
-          <div class="media">
-            <img
-              alt="User Avatar"
-              class="img-size-50 img-circle mr-3"
-              src="/webjars/AdminLTE/3.2.0/dist/img/user8-128x128.jpg"
-            />
-            <div class="media-body">
-              <h3 class="dropdown-item-title">
-                John Pierce
-                <span class="float-right text-sm text-muted"
-                  ><i class="fas fa-star"></i
-                ></span>
-              </h3>
-              <p class="text-sm">I got your message bro</p>
-              <p class="text-sm text-muted">
-                <i class="far fa-clock mr-1"></i> 4 Hours Ago
-              </p>
-            </div>
-          </div>
-          <!-- Message End -->
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">
-          <!-- Message Start -->
-          <div class="media">
-            <img
-              alt="User Avatar"
-              class="img-size-50 img-circle mr-3"
-              src="/webjars/AdminLTE/3.2.0/dist/img/user3-128x128.jpg"
-            />
-            <div class="media-body">
-              <h3 class="dropdown-item-title">
-                Nora Silvester
-                <span class="float-right text-sm text-warning"
-                  ><i class="fas fa-star"></i
-                ></span>
-              </h3>
-              <p class="text-sm">The subject goes here</p>
-              <p class="text-sm text-muted">
-                <i class="far fa-clock mr-1"></i> 4 Hours Ago
-              </p>
-            </div>
-          </div>
-          <!-- Message End -->
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item dropdown-footer" href="#">See All Messages</a>
-      </div>
-    </li>
-    <!-- Notifications Dropdown Menu -->
-    <li class="nav-item dropdown">
-      <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="far fa-bell"></i>
-        <span class="badge badge-warning navbar-badge">15</span>
-      </a>
-      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        <span class="dropdown-item dropdown-header">15 Notifications</span>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">
-          <i class="fas fa-envelope mr-2"></i> 4 new messages
-          <span class="float-right text-muted text-sm">3 mins</span>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">
-          <i class="fas fa-users mr-2"></i> 8 friend requests
-          <span class="float-right text-muted text-sm">12 hours</span>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">
-          <i class="fas fa-file mr-2"></i> 3 new reports
-          <span class="float-right text-muted text-sm">2 days</span>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item dropdown-footer" href="#"
-          >See All Notifications</a
-        >
-      </div>
-    </li>
-    <!-- User Profile -->
+    <!-- Shop icon to redirect -->
+    <a class="nav-link" href="/shop">
+      <i class="fas fa-shopping-cart" style="font-size: 25px"></i>
+    </a>
+
     <li class="nav-item dropdown user-menu show">
       <!-- TODO: Get User Model -->
       <a
@@ -150,6 +57,7 @@
           alt="User Image"
           class="user-image img-circle elevation-2"
           src="https://openseauserdata.com/files/0eb4a13bf041f58745649fb7ccab4eb2.jpg"
+          style="height: 40px; width: 40px; margin-right: 10px"
         />
         <!-- <span class="d-none d-md-inline">Alexander Pierce</span> -->
       </a>
@@ -160,47 +68,22 @@
             alt="User Image"
             class="img-circle elevation-2"
             src="https://openseauserdata.com/files/0eb4a13bf041f58745649fb7ccab4eb2.jpg"
+            style="height: 150px; width: 150px"
           />
         </li>
         <!-- Menu Body -->
         <li class="user-body">
           <p class="text-center d-flex flex-column"></p>
           <p th:text="${userEnter.username}"></p>
-          <!-- <small>Member since Nov. 2012</small> -->
           <small th:text="${userEnter.email}"></small>
-          <!-- <div class="row">
-                        <div class="col-4 text-center">
-                            <a href="#">Followers</a>
-                        </div>
-                        <div class="col-4 text-center">
-                            <a href="#">Sales</a>
-                        </div>
-                        <div class="col-4 text-center">
-                            <a href="#">Friends</a>
-                        </div>
-                    </div> -->
-          <!-- /.row -->
         </li>
         <!-- Menu Footer-->
         <li class="user-footer">
-          <a class="btn btn-default btn-flat" href="#">Profile</a>
           <a class="btn btn-default btn-flat float-right" href="/logout"
             >Sign out</a
           >
         </li>
       </ul>
     </li>
-    <!-- <li class="nav-item">
-            <a class="nav-link" data-slide="true" data-widget="control-sidebar" href="#" role="button">
-                <i class="fas fa-th-large"></i>
-                Toggle Right Sidebar
-            </a>
-            <a class="nav-link" data-bs-toggle="offcanvas" href="#part-description" role="button"
-                aria-controls="offcanvasExample">
-                <i class="fas fa-th-large"></i>
-                Toggle Right Sidebar
-            </a>
-        </li> -->
   </ul>
 </nav>
-<!-- /.navbar -->
