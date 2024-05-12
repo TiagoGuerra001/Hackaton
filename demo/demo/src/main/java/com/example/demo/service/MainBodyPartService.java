@@ -53,13 +53,101 @@ public class MainBodyPartService {
         // Create a BodyPart
         BodyPart cortex = new BodyPart();
         cortex.setName("Cortex");
-        cortex.setInfo("Stuff about the cortex.");
+        cortex.setInfo("The brain cortex, or cerebral cortex, is the outer layer of neural tissue " +
+        "of the cerebrum of the brain in humans and other mammals. It is crucial " +
+        "for memory, attention, perception, cognition, awareness, thought, language, " +
+        "and consciousness. The cerebral cortex is divided into four main lobes: the " +
+        "frontal, parietal, temporal, and occipital lobes, each responsible for different " +
+        "functions. For instance, the frontal lobe is associated with decision making " +
+        "and problem-solving, the parietal lobe with sensation and perception, the temporal " +
+        "lobe with memory and emotion, and the occipital lobe with vision.\n" +
+        "\n" +
+        "The cortex is typically 2 to 4 mm thick and contains about 16 billion neurons. " +
+        "The majority of the cerebral cortex is the neocortex, which has six neuronal layers, " +
+        "while the allocortex has three or four layers and includes regions like the hippocampus " +
+        "and olfactory areas. The cerebral cortex is divided into left and right hemispheres, " +
+        "connected by the corpus callosum, with each hemisphere controlling movement and sensation " +
+        "in the opposite side of the body.\n" +
+        "\n" +
+        "The six layers of the neocortex each have different types of neurons with varied functions, " +
+        "ranging from input reception to sending output signals to other brain areas. The cortex " +
+        "exhibits plasticity, meaning it can reorganize itself by forming new neural connections " +
+        "throughout life, particularly after injury. The cortex is also divided into regions called " +
+        "Brodmann areas, based on their cytoarchitectural characteristics, which are often used to " +
+        "classify cortical functions.\n" +
+        "\n" +
+        "Several diseases affect the brain cortex, each leading to specific impairments:\n" +
+        "\n" +
+        "- Alzheimer's Disease is a progressive neurological disorder that causes the brain to shrink " +
+        "and neurons to die, particularly affecting the cortex. This results in severe memory loss, " +
+        "confusion, mood changes, and difficulty with language.\n" +
+        "\n" +
+        "- Epilepsy is marked by sudden recurrent episodes of sensory disturbance, loss of consciousness, " +
+        "or convulsions, associated with abnormal electrical activity in the cortex.\n" +
+        "\n" +
+        "- Stroke occurs when the blood supply to the brain is interrupted or reduced, which can prevent " +
+        "brain tissue from getting oxygen and nutrients. Strokes often affect the cortex, leading to impairments " +
+        "based on the affected areas.\n" +
+        "\n" +
+        "- Parkinson's Disease primarily affects motor function due to basal ganglia disorder, but it also impacts " +
+        "the cortical areas, leading to cognitive and behavioral issues.\n" +
+        "\n" +
+        "- Multiple Sclerosis (MS) affects the brain and spinal cord, causing communication problems between the brain " +
+        "and the rest of the body. In the cortex, MS can lead to lesions that affect cognitive functions.\n" +
+        "\n" +
+        "- Autism Spectrum Disorder (ASD) is a developmental disorder that affects communication and behavior. Some studies " +
+        "suggest that ASD involves irregularities in cortical layers and connections.\n" +
+        "\n" +
+        "- Traumatic Brain Injury (TBI) affects the cortex and can lead to a range of functional impairments, depending on " +
+        "which area of the cortex is affected.\n" +
+        "\n" +
+        "- Schizophrenia affects a person's ability to think, feel, and behave clearly. Abnormalities in cortical structure and " +
+        "function, particularly in the frontal and temporal lobes, are linked to this condition.\n" +
+        "\n" +
+        "Understanding the brain cortex and its functions helps in diagnosing, treating, and managing various neurological and " +
+        "psychological conditions.");
         cortex.setColor("#00FF00");
         cortex.setMainPart(brain);
 
         BodyPart FrontLobe = new BodyPart();
         FrontLobe.setName("Front Lobe");
-        FrontLobe.setInfo("Stuff about the Front Lobe.");
+        FrontLobe.setInfo("The frontal lobe is one of the four main lobes of the cerebral cortex in the brain of mammals, " +
+        "and it plays a pivotal role in high-level cognitive functions. It is located at the front of each " +
+        "hemisphere and is the largest of the brain's lobes. It is responsible for a wide array of complex " +
+        "behaviors and functions, including decision-making, problem-solving, conscious thought, and voluntary " +
+        "movement.\n" +
+        "\n" +
+        "This lobe is essential for controlling attention, behavior, and emotions, facilitating the expression " +
+        "of personality, and regulating aspects of mood. The frontal lobe is also where our ability to plan and " +
+        "organize activities originates, allowing for abstract thinking and creative problem-solving. It houses " +
+        "the motor cortex, which manages the execution of voluntary muscle movements, and the prefrontal cortex, " +
+        "which is critical for focus, hypothesis formation, and the assessment of consequences.\n" +
+        "\n" +
+        "Moreover, the frontal lobe plays a crucial role in the management of emotional expressions, impulse control, " +
+        "and social behavior. This area of the brain enables individuals to navigate complex social interactions, " +
+        "understand and manage personal reactions and emotions, and perform intricate mental processes necessary for " +
+        "goal-directed behavior.\n" +
+        "\n" +
+        "Key Disorders Affecting the Frontal Lobe:\n" +
+        "- Alzheimer's Disease: This progressive neurological disorder significantly impacts the frontal lobe, " +
+        "particularly as the disease advances. It affects cognitive functions such as memory, planning, and organizational " +
+        "skills and leads to changes in personality and social behavior.\n" +
+        "- Stroke: A stroke affecting the frontal lobe can cause various symptoms, depending on which part of the lobe is " +
+        "impacted. Common consequences include paralysis of parts of the body, problems with speech, loss of fine motor " +
+        "skills, and challenges in strategic thinking and problem-solving.\n" +
+        "- Traumatic Brain Injury (TBI): Injuries to the frontal lobe can result in a variety of symptoms due to its role in " +
+        "personality, cognition, and motor function. Victims often experience changes in their ability to concentrate, shifts " +
+        "in personality, impaired memory, difficulty in problem-solving, and erratic or socially inappropriate behavior.\n" +
+        "- Frontotemporal Dementia: This form of dementia primarily affects the frontal and temporal lobes of the brain, leading " +
+        "to significant alterations in personality and behavior early in the disease, along with language and movement difficulties " +
+        "as the condition progresses.\n" +
+        "- Parkinson's Disease: While primarily affecting motor control, Parkinson’s disease also impacts the frontal lobe, especially " +
+        "in later stages. Symptoms can include changes in cognitive abilities, difficulties with planning and executing tasks, and altered " +
+        "social behavior.\n" +
+        "\n" +
+        "The frontal lobe’s integral role in integrating sensory information and coordinating complex cognitive functions makes it crucial " +
+        "for adapting to new situations, modifying behavior in response to new information, and implementing complex plans and strategies."
+);
         FrontLobe.setColor("#FF0000");
         FrontLobe.setMainPart(brain);
 

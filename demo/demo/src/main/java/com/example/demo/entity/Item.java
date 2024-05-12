@@ -23,16 +23,18 @@ public class Item {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-     @Column(name = "info")
+     @Column(name = "info" , nullable = false)
     private String info;
 
-    @Column(name = "price")
-    private double price;
+    @Column(name = "price" , nullable = false)
+    private int price;
 
-    @Column(name = "imageID")
+    @Column(name = "imageID" , nullable = false)
     private String imageID;
+
+    
 
 }

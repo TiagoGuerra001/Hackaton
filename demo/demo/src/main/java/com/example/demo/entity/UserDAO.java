@@ -39,4 +39,8 @@ public class UserDAO {
     @Column(name = "complete") //Information related to the completion of quizzes
     @ManyToMany
     private List<BodyPart> bodyParts;
+
+    @Column(name = "items") //Information related to the items the user has
+    @ManyToMany
+    private List<Item> items;
 }
