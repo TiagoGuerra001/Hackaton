@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.service.annotation.PatchExchange;
 
 import com.example.demo.config.UserDataModel;
+import com.example.demo.entity.BodyPart;
 import com.example.demo.entity.MainPart;
 import com.example.demo.entity.UserDAO;
+import com.example.demo.entity.Item;
 import com.example.demo.repository.MainPartRepository;
 import com.example.demo.repository.UserDAORepository;
 import com.example.demo.repository.ItemRepository;
@@ -57,26 +60,40 @@ public class WebPageController {
         return "login";
     }
 
-    @PostMapping("/shop/{id}")
+    @GetMapping("/shop/{id}")
     public String buyItem(@PathVariable long id) {
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDAO userDAO = userRepository.findByUsername(user.getUsername()).get();
-        int userCoins = userDAO.getCoins();
-        var item = itemRepository.findById(id).get();
-        int itemPrice = item.getPrice();
-        if (userCoins >= itemPrice) {
-            userDAO.setCoins(userCoins - itemPrice);
-           var isto = userDAO.getItems();
-            isto.add(item);
-            userDAO.setItems(isto);
-            userRepository.save(userDAO);
-        }
+        
+        //Get Item
+        Optional<Item> itemOpt = itemRepository.findById(id);
+        Item item = itemOpt.get();
 
-                
-        return "home";
+        if(item != null){
+            //Get item price
+            int itemPrice = item.getPrice();
+            //Get user coins
+            int userCoins = userDAO.getCoins();
+
+            if (userCoins >= itemPrice) {
+                //Pay
+                userDAO.setCoins(userCoins - itemPrice);
+                //Get item
+                List<Item> userItems = userDAO.getItems();
+                userItems.add(item);
+                userDAO.setItems(userItems);
+                userRepository.save(userDAO);
+                //Set item bought
+                item.setBought(true);
+                itemRepository.save(item);
+            }
+            else{
+                System.out.println("I guess you are poor, rip boozoo.");
+            }
+        }
+        
+        return "redirect:/";
     }
-    
-    
 
     @GetMapping("/register")
     public String register() {
@@ -98,16 +115,17 @@ public class WebPageController {
         return "about";
     }
 
-    @RequestMapping("/shop")
+   
+    @GetMapping("/shop")
     public String shop(Model model) {
         //current user
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDAO userDAO = userRepository.findByUsername(user.getUsername()).get();
-        var userCoins = userDAO.getCoins();
         
         model.addAttribute("userEnter", userDAO);
-        model.addAttribute("userCoins", userCoins);
+        model.addAttribute("shopItems", itemRepository.findByBoughtFalse());
         
         return "shop";
     }
+
 }
