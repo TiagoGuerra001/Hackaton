@@ -59,137 +59,123 @@ public class MainBodyPartService {
         BodyPart cortex = new BodyPart();
         cortex.setName("Cortex");
         cortex.setInfo("The brain cortex, or cerebral cortex, is the outer layer of neural tissue " +
-                "of the cerebrum of the brain in humans and other mammals. It is crucial " +
-                "for memory, attention, perception, cognition, awareness, thought, language, " +
-                "and consciousness. The cerebral cortex is divided into four main lobes: the " +
-                "frontal, parietal, temporal, and occipital lobes, each responsible for different " +
-                "functions. For instance, the frontal lobe is associated with decision making " +
-                "and problem-solving, the parietal lobe with sensation and perception, the temporal " +
-                "lobe with memory and emotion, and the occipital lobe with vision.\n" +
-                "\n" +
-                "The cortex is typically 2 to 4 mm thick and contains about 16 billion neurons. " +
-                "The majority of the cerebral cortex is the neocortex, which has six neuronal layers, " +
-                "while the allocortex has three or four layers and includes regions like the hippocampus " +
-                "and olfactory areas. The cerebral cortex is divided into left and right hemispheres, " +
-                "connected by the corpus callosum, with each hemisphere controlling movement and sensation " +
-                "in the opposite side of the body.\n" +
-                "\n" +
-                "The six layers of the neocortex each have different types of neurons with varied functions, " +
-                "ranging from input reception to sending output signals to other brain areas. The cortex " +
-                "exhibits plasticity, meaning it can reorganize itself by forming new neural connections " +
-                "throughout life, particularly after injury. The cortex is also divided into regions called " +
-                "Brodmann areas, based on their cytoarchitectural characteristics, which are often used to " +
-                "classify cortical functions.\n" +
-                "\n" +
-                "Several diseases affect the brain cortex, each leading to specific impairments:\n" +
-                "\n" +
-                "- Alzheimer's Disease is a progressive neurological disorder that causes the brain to shrink " +
-                "and neurons to die, particularly affecting the cortex. This results in severe memory loss, " +
-                "confusion, mood changes, and difficulty with language.\n" +
-                "\n" +
-                "- Epilepsy is marked by sudden recurrent episodes of sensory disturbance, loss of consciousness, " +
-                "or convulsions, associated with abnormal electrical activity in the cortex.\n" +
-                "\n" +
-                "- Stroke occurs when the blood supply to the brain is interrupted or reduced, which can prevent " +
-                "brain tissue from getting oxygen and nutrients. Strokes often affect the cortex, leading to impairments "
-                +
-                "based on the affected areas.\n" +
-                "\n" +
-                "- Parkinson's Disease primarily affects motor function due to basal ganglia disorder, but it also impacts "
-                +
-                "the cortical areas, leading to cognitive and behavioral issues.\n" +
-                "\n" +
-                "- Multiple Sclerosis (MS) affects the brain and spinal cord, causing communication problems between the brain "
-                +
-                "and the rest of the body. In the cortex, MS can lead to lesions that affect cognitive functions.\n" +
-                "\n" +
-                "- Autism Spectrum Disorder (ASD) is a developmental disorder that affects communication and behavior. Some studies "
-                +
-                "suggest that ASD involves irregularities in cortical layers and connections.\n" +
-                "\n" +
-                "- Traumatic Brain Injury (TBI) affects the cortex and can lead to a range of functional impairments, depending on "
-                +
-                "which area of the cortex is affected.\n" +
-                "\n" +
-                "- Schizophrenia affects a person's ability to think, feel, and behave clearly. Abnormalities in cortical structure and "
-                +
-                "function, particularly in the frontal and temporal lobes, are linked to this condition.\n" +
-                "\n" +
-                "Understanding the brain cortex and its functions helps in diagnosing, treating, and managing various neurological and "
-                +
-                "psychological conditions.");
-        cortex.setColor("#E74C3C");
+        "of the cerebrum of the brain in humans and other mammals. It is crucial " +
+        "for memory, attention, perception, cognition, awareness, thought, language, " +
+        "and consciousness. The cerebral cortex is divided into four main lobes: the " +
+        "frontal, parietal, temporal, and occipital lobes, each responsible for different " +
+        "functions. For instance, the frontal lobe is associated with decision making " +
+        "and problem-solving, the parietal lobe with sensation and perception, the temporal " +
+        "lobe with memory and emotion, and the occipital lobe with vision.\n" +
+        "\n" +
+        "The cortex is typically 2 to 4 mm thick and contains about 16 billion neurons. " +
+        "The majority of the cerebral cortex is the neocortex, which has six neuronal layers, " +
+        "while the allocortex has three or four layers and includes regions like the hippocampus " +
+        "and olfactory areas. The cerebral cortex is divided into left and right hemispheres, " +
+        "connected by the corpus callosum, with each hemisphere controlling movement and sensation " +
+        "in the opposite side of the body.\n" +
+        "\n" +
+        "The six layers of the neocortex each have different types of neurons with varied functions, " +
+        "ranging from input reception to sending output signals to other brain areas. The cortex " +
+        "exhibits plasticity, meaning it can reorganize itself by forming new neural connections " +
+        "throughout life, particularly after injury. The cortex is also divided into regions called " +
+        "Brodmann areas, based on their cytoarchitectural characteristics, which are often used to " +
+        "classify cortical functions.\n" +
+        "\n" +
+        "Several diseases affect the brain cortex, each leading to specific impairments:\n" +
+        "\n" +
+        "- Alzheimer's Disease is a progressive neurological disorder that causes the brain to shrink " +
+        "and neurons to die, particularly affecting the cortex. This results in severe memory loss, " +
+        "confusion, mood changes, and difficulty with language.\n" +
+        "\n" +
+        "- Epilepsy is marked by sudden recurrent episodes of sensory disturbance, loss of consciousness, " +
+        "or convulsions, associated with abnormal electrical activity in the cortex.\n" +
+        "\n" +
+        "- Stroke occurs when the blood supply to the brain is interrupted or reduced, which can prevent " +
+        "brain tissue from getting oxygen and nutrients. Strokes often affect the cortex, leading to impairments " +
+        "based on the affected areas.\n" +
+        "\n" +
+        "- Parkinson's Disease primarily affects motor function due to basal ganglia disorder, but it also impacts " +
+        "the cortical areas, leading to cognitive and behavioral issues.\n" +
+        "\n" +
+        "- Multiple Sclerosis (MS) affects the brain and spinal cord, causing communication problems between the brain " +
+        "and the rest of the body. In the cortex, MS can lead to lesions that affect cognitive functions.\n" +
+        "\n" +
+        "- Autism Spectrum Disorder (ASD) is a developmental disorder that affects communication and behavior. Some studies " +
+        "suggest that ASD involves irregularities in cortical layers and connections.\n" +
+        "\n" +
+        "- Traumatic Brain Injury (TBI) affects the cortex and can lead to a range of functional impairments, depending on " +
+        "which area of the cortex is affected.\n" +
+        "\n" +
+        "- Schizophrenia affects a person's ability to think, feel, and behave clearly. Abnormalities in cortical structure and " +
+        "function, particularly in the frontal and temporal lobes, are linked to this condition.\n" +
+        "\n" +
+        "Understanding the brain cortex and its functions helps in diagnosing, treating, and managing various neurological and " +
+        "psychological conditions.");
+        cortex.setColor("#FFD700");
         cortex.setMainPart(brain);
 
         BodyPart FrontLobe = new BodyPart();
         FrontLobe.setName("Front Lobe");
-        FrontLobe.setInfo(
-                "The frontal lobe is one of the four main lobes of the cerebral cortex in the brain of mammals, " +
-                        "and it plays a pivotal role in high-level cognitive functions. It is located at the front of each "
-                        +
-                        "hemisphere and is the largest of the brain's lobes. It is responsible for a wide array of complex "
-                        +
-                        "behaviors and functions, including decision-making, problem-solving, conscious thought, and voluntary "
-                        +
-                        "movement.\n" +
-                        "\n" +
-                        "This lobe is essential for controlling attention, behavior, and emotions, facilitating the expression "
-                        +
-                        "of personality, and regulating aspects of mood. The frontal lobe is also where our ability to plan and "
-                        +
-                        "organize activities originates, allowing for abstract thinking and creative problem-solving. It houses "
-                        +
-                        "the motor cortex, which manages the execution of voluntary muscle movements, and the prefrontal cortex, "
-                        +
-                        "which is critical for focus, hypothesis formation, and the assessment of consequences.\n" +
-                        "\n" +
-                        "Moreover, the frontal lobe plays a crucial role in the management of emotional expressions, impulse control, "
-                        +
-                        "and social behavior. This area of the brain enables individuals to navigate complex social interactions, "
-                        +
-                        "understand and manage personal reactions and emotions, and perform intricate mental processes necessary for "
-                        +
-                        "goal-directed behavior.\n" +
-                        "\n" +
-                        "Key Disorders Affecting the Frontal Lobe:\n" +
-                        "- Alzheimer's Disease: This progressive neurological disorder significantly impacts the frontal lobe, "
-                        +
-                        "particularly as the disease advances. It affects cognitive functions such as memory, planning, and organizational "
-                        +
-                        "skills and leads to changes in personality and social behavior.\n" +
-                        "- Stroke: A stroke affecting the frontal lobe can cause various symptoms, depending on which part of the lobe is "
-                        +
-                        "impacted. Common consequences include paralysis of parts of the body, problems with speech, loss of fine motor "
-                        +
-                        "skills, and challenges in strategic thinking and problem-solving.\n" +
-                        "- Traumatic Brain Injury (TBI): Injuries to the frontal lobe can result in a variety of symptoms due to its role in "
-                        +
-                        "personality, cognition, and motor function. Victims often experience changes in their ability to concentrate, shifts "
-                        +
-                        "in personality, impaired memory, difficulty in problem-solving, and erratic or socially inappropriate behavior.\n"
-                        +
-                        "- Frontotemporal Dementia: This form of dementia primarily affects the frontal and temporal lobes of the brain, leading "
-                        +
-                        "to significant alterations in personality and behavior early in the disease, along with language and movement difficulties "
-                        +
-                        "as the condition progresses.\n" +
-                        "- Parkinson's Disease: While primarily affecting motor control, Parkinson’s disease also impacts the frontal lobe, especially "
-                        +
-                        "in later stages. Symptoms can include changes in cognitive abilities, difficulties with planning and executing tasks, and altered "
-                        +
-                        "social behavior.\n" +
-                        "\n" +
-                        "The frontal lobe’s integral role in integrating sensory information and coordinating complex cognitive functions makes it crucial "
-                        +
-                        "for adapting to new situations, modifying behavior in response to new information, and implementing complex plans and strategies.");
-        FrontLobe.setColor("#3498DB");
+        FrontLobe.setInfo("The frontal lobe is one of the four main lobes of the cerebral cortex in the brain of mammals, " +
+        "and it plays a pivotal role in high-level cognitive functions. It is located at the front of each " +
+        "hemisphere and is the largest of the brain's lobes. It is responsible for a wide array of complex " +
+        "behaviors and functions, including decision-making, problem-solving, conscious thought, and voluntary " +
+        "movement.\n" +
+        "\n" +
+        "This lobe is essential for controlling attention, behavior, and emotions, facilitating the expression " +
+        "of personality, and regulating aspects of mood. The frontal lobe is also where our ability to plan and " +
+        "organize activities originates, allowing for abstract thinking and creative problem-solving. It houses " +
+        "the motor cortex, which manages the execution of voluntary muscle movements, and the prefrontal cortex, " +
+        "which is critical for focus, hypothesis formation, and the assessment of consequences.\n" +
+        "\n" +
+        "Moreover, the frontal lobe plays a crucial role in the management of emotional expressions, impulse control, " +
+        "and social behavior. This area of the brain enables individuals to navigate complex social interactions, " +
+        "understand and manage personal reactions and emotions, and perform intricate mental processes necessary for " +
+        "goal-directed behavior.\n" +
+        "\n" +
+        "Key Disorders Affecting the Frontal Lobe:\n" +
+        "- Alzheimer's Disease: This progressive neurological disorder significantly impacts the frontal lobe, " +
+        "particularly as the disease advances. It affects cognitive functions such as memory, planning, and organizational " +
+        "skills and leads to changes in personality and social behavior.\n" +
+        "- Stroke: A stroke affecting the frontal lobe can cause various symptoms, depending on which part of the lobe is " +
+        "impacted. Common consequences include paralysis of parts of the body, problems with speech, loss of fine motor " +
+        "skills, and challenges in strategic thinking and problem-solving.\n" +
+        "- Traumatic Brain Injury (TBI): Injuries to the frontal lobe can result in a variety of symptoms due to its role in " +
+        "personality, cognition, and motor function. Victims often experience changes in their ability to concentrate, shifts " +
+        "in personality, impaired memory, difficulty in problem-solving, and erratic or socially inappropriate behavior.\n" +
+        "- Frontotemporal Dementia: This form of dementia primarily affects the frontal and temporal lobes of the brain, leading " +
+        "to significant alterations in personality and behavior early in the disease, along with language and movement difficulties " +
+        "as the condition progresses.\n" +
+        "- Parkinson's Disease: While primarily affecting motor control, Parkinson’s disease also impacts the frontal lobe, especially " +
+        "in later stages. Symptoms can include changes in cognitive abilities, difficulties with planning and executing tasks, and altered " +
+        "social behavior.\n" +
+        "\n" +
+        "The frontal lobe’s integral role in integrating sensory information and coordinating complex cognitive functions makes it crucial " +
+        "for adapting to new situations, modifying behavior in response to new information, and implementing complex plans and strategies."
+);
+        FrontLobe.setColor("#1F9A8F");
         FrontLobe.setMainPart(brain);
 
         BodyPart Cerebellum = new BodyPart();
         Cerebellum.setName("Cerebellum");
         Cerebellum.setInfo("Stuff about the Cerebellum.");
-        Cerebellum.setColor("#2ECC71");
+        Cerebellum.setColor("#8B4513");
         Cerebellum.setMainPart(brain);
+
+        BodyPart ocipitalLobe = new BodyPart();
+        ocipitalLobe.setName("Ocipital Lobe");
+        ocipitalLobe.setInfo("The occipital lobe is one of the four main lobes of the cerebral cortex in the brain, " +
+        "and it is located at the back of each hemisphere. This lobe is primarily responsible for processing visual " +
+        "information received from the eyes, allowing individuals to perceive and interpret the world around them. " +
+        "The occipital lobe contains the primary visual cortex, which is essential for visual perception and processing " +
+        "of visual stimuli.\n" +
+        "\n" +
+        "The primary visual cortex receives input from the eyes and processes this information to create a coherent visual " +
+        "representation of the environment. It is responsible for detecting shapes, colors, motion, and depth, enabling " +
+        "individuals to recognize objects, faces, and scenes. The occipital lobe also plays a role in visual memory, " +
+        "allowing individuals to recall and recognize previously seen images.\n");
+        ocipitalLobe.setColor("#FF4500");
+        ocipitalLobe.setMainPart(brain);
 
         // Create a Question
         List<String> questionsStrings = new ArrayList<>();
@@ -239,6 +225,13 @@ public class MainBodyPartService {
         question3.setBodyPart(cortex);
 
         // save mainpart
+        List<BodyPart> bodyParts = new ArrayList<>();
+        bodyParts.add(cortex);
+        bodyParts.add(FrontLobe);
+        bodyParts.add(Cerebellum);
+        bodyParts.add(ocipitalLobe);
+        brain.setBodyParts(bodyParts);
+        mainBodyPartRepository.save(brain);
 
         // save bodypart
         List<Question> questions = new ArrayList<>();
@@ -249,6 +242,7 @@ public class MainBodyPartService {
         bodyPartRepository.save(cortex);
         bodyPartRepository.save(FrontLobe);
         bodyPartRepository.save(Cerebellum);
+        bodyPartRepository.save(ocipitalLobe);
 
         // save questions
         questionRepository.save(question1);
@@ -258,7 +252,8 @@ public class MainBodyPartService {
         // Create another MainPart Arm
         MainPart heart = new MainPart();
         heart.setName("Heart");
-        heart.setInfo("Stuff about the heart.");
+        heart.setInfo("The heart is a vital organ responsible for pumping blood throughout the body, supplying oxygen and nutrients to tissues and organs" 
+        + "while removing waste products. It's composed of four chambers: two upper chambers called atria and two lower chambers called ventricles.");
 
         // Create a BodyPart
         BodyPart atrium = new BodyPart();
@@ -326,7 +321,7 @@ public class MainBodyPartService {
         question7.setText("pergunta exemplificativa1?");
         question7.setDifficulty(1);
         question7.setWrongAnswers(questionsStrings7);
-        question7.setCorrectAnswer("*esta é!!");
+        question7.setCorrectAnswer("esta é!!");
         question7.setBodyPart(FrontLobe);
 
         Question question8 = new Question();
@@ -337,7 +332,7 @@ public class MainBodyPartService {
         question8.setText("pergunta exemplificativa2?");
         question8.setDifficulty(1);
         question8.setWrongAnswers(questionsStrings7);
-        question8.setCorrectAnswer("*esta é!!");
+        question8.setCorrectAnswer("esta é!!");
         question8.setBodyPart(FrontLobe);
 
         Question question9 = new Question();
@@ -350,6 +345,8 @@ public class MainBodyPartService {
         question9.setWrongAnswers(questionsStrings7);
         question9.setCorrectAnswer("*esta é!!");
         question9.setBodyPart(FrontLobe);
+
+
 
         // save mainpart
         List<BodyPart> bodyParts2 = new ArrayList<>();
