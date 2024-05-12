@@ -8,27 +8,21 @@
 </head>
 
 <body>
-  <div layout:fragment="content">
-    <div class="row">
+  <div layout:fragment="content" style="width: 100vw; height: 100vh;">
+    <div class="row h-100">
       <!--Side Navbar buttons-->
-      <div class="col bg-info-subtle">
-        <nav class="mt-2 ml-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview" role="menu"
+      <div class="col-2">
+        <nav class="bg-info-subtle h-100 p-3 ">
+          <ul class="nav nav-pills nav-sidebar" data-accordion="false" data-widget="treeview" role="menu"
             th:each="mainPart : ${mainParts}">
-            <button type="button"  style="
-                  display: flex;
-                  height: 50px;
-                  align-items: center;
-                  justify-content: center;
-                  margin-bottom: 10px;
-                  text-align: center;
-                " class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"
-              data-body-part-info=""
+            <button type="button"
+              class="btn btn-outline-primary body-part-nav-item w-100 mb-3 d-flex flex-row justify-content-center"
+              data-body-part="upper" data-body-part-info=""
               th:attr="data-body-part=${mainPart.id}, data-body-part-name=${mainPart.name}, data-body-part-info=${mainPart.info}"
               onclick="changeValue(this)">
-              <div class="d-flex h-100 align-content-center gap-2">
+              <div class="d-flex w-100 h-100 flex-row justify-content-center align-items-center gap-2">
                 <i class="fa fa-book"></i>
-                <p th:text="${mainPart.name}"></p>
+                <p class="h-100 d-flex justify-content-center align-items-center" th:text="${mainPart.name}"></p>
               </div>
             </button>
           </ul>
