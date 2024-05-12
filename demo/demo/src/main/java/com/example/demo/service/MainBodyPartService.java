@@ -374,13 +374,6 @@ public class MainBodyPartService {
         questionRepository.save(question8);
         questionRepository.save(question9);
 
-        List<BodyPart> bodyParts = new ArrayList<>();
-        bodyParts.add(cortex);
-        bodyParts.add(FrontLobe);
-        bodyParts.add(Cerebellum);
-        brain.setBodyParts(bodyParts);
-        mainBodyPartRepository.save(brain);
-
         // Create Item
         Item liver = new Item();
         liver.setName("Liver");
