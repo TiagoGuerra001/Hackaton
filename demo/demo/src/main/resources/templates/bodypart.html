@@ -25,8 +25,8 @@
 
     <div class="card gap-2 h-100">
       <div class="card-header p-2 d-flex justify-content-center gap-4">
-        <a th:href="@{'/bodypart/' + ${mainPart.id}}" type="button" class="btn btn-sm btn-outline-primary font-weight-bold"
-          style="width: 120px">
+        <a th:href="@{'/bodypart/' + ${mainPart.id}}" type="button"
+          class="btn btn-sm btn-outline-primary font-weight-bold" style="width: 120px">
           Documents
         </a>
         <a th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes'}" type="button"
@@ -43,11 +43,11 @@
             </div>
           </div>
           <div class="col">
-            <!-- <v class="card card-success" style="di
-                                            transition: all 0.15s ease 0s;
-                                            height: inherit;
-                                            width: inherit;
-                                          ">
+            <div class="card card-success ml-0" style="
+                            transition: all 0.15s ease 0s;
+                            height: inherit;
+                            width: inherit;
+                          ">
               <div class="card-header">
                 <h3 class="card-title" th:text="${mainPart.name}"></h3>
                 <div class="card-tools">
@@ -62,45 +62,23 @@
               <div class="card-body">
                 <p th:text="${mainPart.info}"></p>
               </div>
-            </div> -->
-            <div class="col">
-              <div class="card card-success" style="
-                  transition: all 0.15s ease 0s;
-                  height: inherit;
-                  width: inherit;
-                ">
-                <div class="card-header">
-                  <h3 class="card-title" th:text="${mainPart.name}"></h3>
+            </div>
+
+            <div class="ps-4" th:each="bodyPart : ${bodyParts}">
+              <div class="card collapsed-card">
+                <div class="card-header" th:style="'background-color: ' + ${bodyPart.color} + ' ;'">
+                  <h3 class="card-title" th:text="${bodyPart.name}"></h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="maximize">
                       <i class="fas fa-expand"></i>
                     </button>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
+                      <i class="fas fa-plus"></i>
                     </button>
                   </div>
                 </div>
                 <div class="card-body">
-                  <p th:text="${mainPart.info}"></p>
-                </div>
-              </div>
-
-              <div class="ps-4" th:each="bodyPart : ${bodyParts}">
-                <div class="card collapsed-card">
-                  <div class="card-header" th:style="'background-color: ' + ${bodyPart.color} + ' ;'">
-                    <h3 class="card-title" th:text="${bodyPart.name}"></h3>
-                    <div class="card-tools">
-                      <button type="button" class="btn btn-tool" data-card-widget="maximize">
-                        <i class="fas fa-expand"></i>
-                      </button>
-                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p th:text="${bodyPart.info}"></p>
-                  </div>
+                  <p th:text="${bodyPart.info}"></p>
                 </div>
               </div>
             </div>
