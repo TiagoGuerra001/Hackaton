@@ -99,16 +99,21 @@ public class AdminPageController {
             List<BodyPart> userBodyParts = userDAO.getBodyParts();
 
             //Holds the states related to completion of quizzes
-            List<Integer> quizStates = new ArrayList<>(bodyParts.size());
+            List<String> quizStates = new ArrayList<>(bodyParts.size());
+
+            // initialize with empty strings
+            for (int i = 0; i < bodyParts.size(); i++) {
+                quizStates.add("");
+            }
 
             for (int i = 0; i < bodyParts.size(); i++) {
                 if(userBodyParts.contains(bodyParts.get(i))){
                     //Done state
-                    quizStates.add(i, 2);
+                    quizStates.add(i, "done");
                 }
                 else{
                     //Active state
-                    quizStates.add(i, 1);
+                    quizStates.add(i, "active");
                     break;
                 }
             }
@@ -116,7 +121,7 @@ public class AdminPageController {
             model.addAttribute("mainPart", mainPart);
             model.addAttribute("bodyParts", bodyParts);
             model.addAttribute("quizStates", quizStates);
-
+            
         }
         return "bodypart-quizzes";
     }
