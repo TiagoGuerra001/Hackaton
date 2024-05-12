@@ -27,7 +27,7 @@
 
       <div th:each="question, questionIndex : ${questions}">
         <div th:id="answer + ${questionIndex.index}"
-          th:class="(${questionIndex.index == 0}) ? 'card card-light' : 'card card-light collapsed-card'">
+          th:class="(${questionIndex.index == 0}) ? 'card card-primary' : 'card card-primary collapsed-card'">
           <div class="card-header">
             <h3 class="card-title" th:text="${question.text}"></h3>
             <div class="card-tools">
