@@ -1,74 +1,57 @@
 <!DOCTYPE html>
-<html
-  layout:decorate="~{shared/layout}"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-  <head>
-    <meta charset="UTF-8" />
-    <title>Shop</title>
-    <style>
-      /* CSS styles here */
-    </style>
-  </head>
+<html layout:decorate="~{shared/layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-  <body>
-    <div layout:fragment="content">
-      <div class="card card-primary">
-        <div class="card-header d-flex w-100">
-          <h4>Shop</h4>
+<head>
+  <meta charset="UTF-8" />
+  <title>Shop</title>
+  <style>
+    /* CSS styles here */
+  </style>
+</head>
 
-          <h4 class="ml-auto">
-            <i class="fas fa-coins"></i>
-            <span th:text="${userCoin}"></span>
-          </h4>
-        </div>
-        <div class="card-body">
-          <div
-            class="filter-container p-0 row"
-            style="
+<body>
+  <div layout:fragment="content">
+    <div class="card card-primary">
+      <div class="card-header d-flex w-100">
+        <h4>Shop</h4>
+
+        <h4 class="ml-auto">
+          <i class="fas fa-coins"></i>
+          <span th:text="${userCoin}"></span>
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="filter-container p-0 row" style="
               padding: 3px;
               position: relative;
               width: 100%;
               display: flex;
               flex-wrap: wrap;
-              height: 132px;
-            "
-          >
-            <!-- Card elements here -->
-            <div class="row" style="display: flex; flex-wrap: wrap">
-              <div class="col-md-4" th:each="item : ${shopItems}">
-                <div class="card">
-                  <div class="card-header">
-                    <h3
-                      class="card-title text-center"
-                      th:text="${item.name}"
-                    ></h3>
+              min-height: 132px;
+            ">
+          <!-- Card elements here -->
+          <div class="row" style="display: flex; flex-wrap: wrap">
+            <div class="col-md-4" th:each="item : ${shopItems}">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title text-center" th:text="${item.name}"></h3>
+                </div>
+                <div class="card-body">
+                  <div class="img-card">
+                    <img th:src="'/images/organs/'+${item.imageID}" alt="Item image"
+                      style="width: 200px; height: 200px" />
                   </div>
-                  <div class="card-body">
-                    <div class="img-card">
-                      <img
-                        th:src="'/images/organs/'+${item.imageID}"
-                        alt="Item image"
-                        style="width: 200px; height: 200px"
-                      />
-                    </div>
-                    <div class="item-text">
-                      <p th:text="${item.info}"></p>
-                    </div>
-                    <div class="item-buy">
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <h4 th:text="'Price: ' + ${item.price}"></h4>
-                        <a
-                          type="button"
-                          class="btn btn-primary"
-                          th:style="${item.price} > ${userCoin} ? 'pointer-events: none; opacity: 0.5;' : ''"
-                          th:href="@{'/shop/' + ${item.id}}"
-                        >
-                          Buy
-                        </a>
-                      </div>
+                  <div class="item-text">
+                    <p th:text="${item.info}"></p>
+                  </div>
+                  <div class="item-buy">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h4 th:text="'Price: ' + ${item.price}"></h4>
+                      <a type="button" class="btn btn-primary"
+                        th:style="${item.price} > ${userCoin} ? 'pointer-events: none; opacity: 0.5;' : ''"
+                        th:href="@{'/shop/' + ${item.id}}">
+                        Buy
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -78,5 +61,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
