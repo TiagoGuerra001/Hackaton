@@ -111,4 +111,17 @@ public class WebPageController {
     public String about() {
         return "about";
     }
+
+    @RequestMapping("/shop")
+    public String shop(Model model) {
+        //current user
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDAO userDAO = userRepository.findByUsername(user.getUsername()).get();
+        var userCoins = userDAO.getCoins();
+        
+        model.addAttribute("userEnter", userDAO);
+        model.addAttribute("userCoins", userCoins);
+        
+        return "shop";
+    }
 }

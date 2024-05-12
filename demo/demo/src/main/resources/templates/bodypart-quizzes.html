@@ -88,28 +88,20 @@
         <!-- Button Path-->
         <div style="display: flex; justify-content: center; width: 100%">
           <div class="quizzes-list">
-            <div>
-              <button id="button1" class="round-button active"></button>
-            </div>
-            <div>
-              <button id="button2" class="round-button"></button>
-            </div>
-            <div>
-              <button id="button3" class="round-button"></button>
-            </div>
-            <div>
-              <button id="button4" class="round-button"></button>
-            </div>
-            <div>
-              <button id="button5" class="round-button"></button>
+            <!-- Quizzes-->
+            <div th:each="bodyPart, bodyPartIndex : ${bodyParts}">
+              <!-- Single Quizzes-->
+              <div>
+                <a th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes/' + ${bodyPart.id}}" id="stateIndex.index" th:class="'round-button ' + ${quizStates[__${bodyPartIndex.index}__]}"></a>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
 
-
-
+    
   </div>
 </body>
 <script>

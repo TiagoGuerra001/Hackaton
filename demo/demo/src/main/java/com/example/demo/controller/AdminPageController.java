@@ -92,19 +92,37 @@ public class AdminPageController {
 
         Optional<MainPart> mainPartOpt = MPRepository.findById(id);
         if (mainPartOpt.isPresent()) {
+            //Main and Bodyparts
             MainPart mainPart = mainPartOpt.get();
             List<BodyPart> bodyParts = mainPart.getBodyParts();
 
-            Map<Long, List<Question>> bodyPartQuestionsMap = new HashMap<>();
+            //List of body parts related to the user (represent the quizzes)
+            List<BodyPart> userBodyParts = userDAO.getBodyParts();
 
-            for (BodyPart bodyPart : bodyParts) {
-                List<Question> questions = bodyPart.getQuestions();
-                bodyPartQuestionsMap.put(bodyPart.getId(), questions);
+            //Holds the states related to completion of quizzes
+            List<String> quizStates = new ArrayList<>(bodyParts.size());
+
+            // initialize with empty strings
+            for (int i = 0; i < bodyParts.size(); i++) {
+                quizStates.add("");
+            }
+
+            for (int i = 0; i < bodyParts.size(); i++) {
+                if(userBodyParts.contains(bodyParts.get(i))){
+                    //Done state
+                    quizStates.add(i, "done");
+                }
+                else{
+                    //Active state
+                    quizStates.add(i, "active");
+                    break;
+                }
             }
 
             model.addAttribute("mainPart", mainPart);
             model.addAttribute("bodyParts", bodyParts);
-            model.addAttribute("bodyPartQuestionsMap", bodyPartQuestionsMap);
+            model.addAttribute("quizStates", quizStates);
+            
         }
         return "bodypart-quizzes";
     }
