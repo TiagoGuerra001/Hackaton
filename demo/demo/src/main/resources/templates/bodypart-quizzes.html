@@ -5,6 +5,33 @@
   <meta charset="UTF-8" />
   <title>Quizzes</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
+
+
+  <script>
+    async function openChest(chestElement) {
+      chestElement.classList.add('opened');
+
+      try {
+          const response = await fetch('/open-chest', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ chestId: chestElement.id }), // Pass the ID to the server
+          });
+
+          if (response.ok) {
+              const result = await response.text();
+              console.log(result); // Display the response from the server
+          } else {
+              console.error('Error opening chest:', response.status);
+          }
+      } catch (error) {
+          console.error('An error occurred:', error);
+      }
+    }
+
+  </script>
 </head>
 
 <body>
@@ -63,15 +90,30 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 10px;
+            gap: 30px;
           }
 
-          .quizzes-list div:nth-child(odd) {
+          /* .quizzes-list div:nth-child(odd) {
             margin-right: 10rem;
           }
 
           .quizzes-list div:nth-child(even) {
             margin-left: 10rem;
+          } */
+
+          .chest{
+            display: inline-block;
+            padding: 35px 35px;
+            border: none;
+            background-image: url("/images/icons/chest.png");
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+
+          .chest.opened{
+            background-image: url("/images/icons/chest-open.png");
+            pointer-events: none;
           }
         </style>
 
@@ -81,10 +123,13 @@
             <!-- Quizzes-->
             <div th:each="bodyPart, bodyPartIndex : ${bodyParts}">
               <!-- Single Quizzes-->
-              <div>
+              <div th:style="'margin-right:' + ${pathMargins[__${bodyPartIndex.index}__]} + 'px;'">
                 <a th:href="@{'/bodypart/' + ${mainPart.id} + '/quizzes/' + ${bodyPart.id}}" id="stateIndex.index" th:class="'round-button ' + ${quizStates[__${bodyPartIndex.index}__]}"></a>
               </div>
-
+              <!-- treasure chest example-->
+              <div>
+                <a class="chest" th:if="${bodyPartIndex.index % 2 == 0}" onclick="openChest(this)"></a>
+              </div>
             </div>
           </div>
         </div>

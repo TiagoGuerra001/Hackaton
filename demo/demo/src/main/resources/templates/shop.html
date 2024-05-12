@@ -72,13 +72,13 @@
                         class="d-flex justify-content-between align-items-center"
                       >
                         <h4 th:text="'Price: ' + ${item.price}"></h4>
-                        <button
+                        <a
                           type="button"
                           class="btn btn-primary"
-                          onclick="onclickBuy()"
+                          th:href="@{'/shop/' + ${item.id}}"
                         >
                           Buy
-                        </button>
+                    </a>
                       </div>
                     </div>
                   </div>
@@ -89,77 +89,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      // JavaScript code here
-      console.log("Shop Page");
-      let currentPart = "";
-
-      function onclickBuy() {
-        console.log("Buyed item!");
-        window.location.href = "/";
-      }
-
-      const filterButtons = document.querySelectorAll("[data-filter]");
-      const sortSelect = document.querySelector("[data-sortorder]");
-      const sortAscButton = document.querySelector("[data-sortasc]");
-      const sortDescButton = document.querySelector("[data-sortdesc]");
-
-      // Add event listeners to filter buttons
-      filterButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const filterValue = button.getAttribute("data-filter");
-          // Perform filtering logic based on filterValue
-          // ...
-        });
-      });
-
-      // Add event listener to sort select
-      sortSelect.addEventListener("change", () => {
-        const sortOrder = sortSelect.value;
-        // Perform sorting logic based on sortOrder
-        // ...
-      });
-
-      // Add event listeners to sort buttons
-      sortAscButton.addEventListener("click", () => {
-        // Perform ascending sorting logic
-        //gets all the cards price tags values
-        let priceTags = document.querySelectorAll("#price-tag");
-        //sorts the price tags values
-        priceTags.sort((a, b) => a.value - b.value);
-        //rearranges the cards based on the sorted price tags
-        priceTags.forEach((priceTag, index) => {
-          let card = priceTag.closest(".card");
-          card.style.order = index;
-        });
-      });
-
-      sortDescButton.addEventListener("click", () => {
-        // Perform descending sorting logic
-        // ...
-      });
-
-      // Buy item logic here
-      function BuyItem(price) {
-        // Buy item logic here
-        fetch("/update-price", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ price: price }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            // Handle the response data
-            console.log(data);
-          })
-          .catch((error) => {
-            // Handle any errors
-            console.error(error);
-          });
-      }
-    </script>
   </body>
 </html>

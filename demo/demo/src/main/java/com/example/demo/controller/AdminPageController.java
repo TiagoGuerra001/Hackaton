@@ -14,12 +14,14 @@ import com.example.demo.repository.UserDAORepository;
 import groovyjarjarantlr4.v4.codegen.model.SrcOp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -119,13 +121,43 @@ public class AdminPageController {
                     break;
                 }
             }
+            
+            //list of margins for the path
+            List<Long> margins = new ArrayList<>();
+            List<Long> pattern = List.of(0L, 80L, 160L, 80L); // Define the repeating pattern
+
+            int bodyPartsSize = bodyParts.size(); // Assuming you have a valid 'bodyParts' list
+
+            for (int i = 0; i < bodyPartsSize; i++) {
+                long margin = pattern.get(i % pattern.size()); // Get the corresponding value from the pattern
+                margins.add(margin);
+            }
 
             model.addAttribute("mainPart", mainPart);
             model.addAttribute("bodyParts", bodyParts);
             model.addAttribute("quizStates", quizStates);
+            model.addAttribute("pathMargins", margins);
             
         }
         return "bodypart-quizzes";
+    }
+
+    @PostMapping("/open-chest")
+    public ResponseEntity<String> openChest(@RequestBody String requestBody) {
+        // Process the request and interact with your database
+        // For demonstration purposes, let's just return a success message
+        //TODO: add the money
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDAO userDAO = userDAORepository.findByUsername(user.getUsername()).get();
+
+        //Adds the coins
+        int userCoins = userDAO.getCoins();
+        userDAO.setCoins(userCoins + 30);
+
+        //Saves user
+        userDAORepository.save(userDAO);
+
+        return ResponseEntity.ok("Chest opened successfully!");
     }
 
     @GetMapping("/bodypart/{mainPartId}/quizzes/{bodyPartId}")
@@ -158,7 +190,6 @@ public class AdminPageController {
         model.addAttribute("bodyPart", bodyPart);
         model.addAttribute("questions", questions);
         model.addAttribute("questionsStrings", questionsStrings);
-        
         
         return "quizz";
     }

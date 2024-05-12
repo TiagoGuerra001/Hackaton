@@ -35,6 +35,7 @@ public class Item {
     @Column(name = "imageID" , nullable = false)
     private String imageID;
 
-    
+    @Column(name = "bought", columnDefinition = "boolean default false")
+    private boolean bought;
 
 }
