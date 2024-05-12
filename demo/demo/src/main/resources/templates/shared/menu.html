@@ -1,38 +1,20 @@
 <script>
-  /* $(".main-sidebar").ready(function() {
-    $('.body-part-nav-item').click(function() {
-      var name = $(this).data('name');
-      $('#part-description').text(name);
-    });
-  });
- */
-
-  const changeValue = (e) => {
-    console.log("Clicked ", e);
-    const elem = e.getAttribute('data-body-part');
-    const elemName = e.getAttribute('data-body-part-name');
-    const elemInfo = e.getAttribute('data-body-part-info');
-    localStorage.setItem('selectedPart', elem);
-    localStorage.setItem('selectedPartName', elemName);
-    localStorage.setItem('selectedPartInfo', elemInfo);
-  }
 
 </script>
 
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-primary bg-light elevation-4">
-    <!-- Brand Logo -->
-    <a class="brand-link" href="/">
-         <img alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             src="/webjars/AdminLTE/3.2.0/dist/img/AdminLTELogo.png"
-             style="opacity: .8"> 
-        <span class="">NoU</span>
-    </a>
+  <!-- Brand Logo -->
+  <a class="brand-link" href="/">
+    <img alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      src="/webjars/AdminLTE/3.2.0/dist/img/AdminLTELogo.png" style="opacity: .8">
+    <span class="">NoU</span>
+  </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img alt="User Image" class="img-circle elevation-2"
                      src="/webjars/AdminLTE/3.2.0/dist/img/user2-160x160.jpg">
@@ -44,19 +26,14 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul
-        class="nav nav-pills nav-sidebar flex-column"
-        data-accordion="false"
-        data-widget="treeview"
-        role="menu"
-        th:each="mainPart : ${mainParts}"
-      >
+      <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview" role="menu"
+        th:each="mainPart : ${mainParts}">
         <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
 
-                <!-- TODO: Get from model the body parts of the human body -->
+        <!-- TODO: Get from model the body parts of the human body -->
 
-                <!-- <li class="nav-item">
+        <!-- <li class="nav-item">
                     <a class="nav-link" href="/home">
                         <i class="nav-icon fas fa-th"></i>
                         <p>Home Page (To remove???)</p>
@@ -115,27 +92,23 @@
                 </li> -->
 
 
-                <!-- FIXME: Fix data-body-part -->
-                <button 
-                type="button" 
-                class="btn btn-outline-primary btn-block body-part-nav-item " 
-                data-body-part="upper"
-                data-body-part-info=""
-                th:attr="data-body-part=${mainPart.id}, data-body-part-name=${mainPart.name}, data-body-part-info=${mainPart.info}"
-               
-                onclick="changeValue(this)">
-                  <i class="fa fa-bell"></i> 
-                  <p th:text="${mainPart.name}"></p>
-                </button>
-  
-                <!-- <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"><i class="fa fa-bell"></i> <p>Head</p></button>
+        <!-- FIXME: Fix data-body-part -->
+        <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"
+          data-body-part-info=""
+          th:attr="data-body-part=${mainPart.id}, data-body-part-name=${mainPart.name}, data-body-part-info=${mainPart.info}"
+          onclick="changeValue(this)">
+          <i class="fa fa-bell"></i>
+          <p th:text="${mainPart.name}"></p>
+        </button>
+
+        <!-- <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item " data-body-part="upper"><i class="fa fa-bell"></i> <p>Head</p></button>
 
                 <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item" data-body-part="middle"><i class="fa fa-bell"></i> <p>Torso</p></button>
 
                 <button type="button" class="btn btn-outline-primary btn-block body-part-nav-item" data-body-part="bottom"><i class="fa fa-bell"></i> <p>Toes</p></button> -->
 
 
-                <!-- <li class="nav-item ">
+        <!-- <li class="nav-item ">
                     <a class="nav-link body-part-nav-item " data-body-part="upper">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>Head</p>
@@ -156,20 +129,20 @@
                     </a>
                 </li> -->
 
-            </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-        <li class="nav-item">
-          <a class="nav-link" href="/bodypart/1">
-            <i class="nav-icon fas fa-th"></i>
-            <p>brain</p>
-          </a>
-        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+  <li class="nav-item">
+    <a class="nav-link" href="/bodypart/1">
+      <i class="nav-icon fas fa-th"></i>
+      <p>brain</p>
+    </a>
+  </li>
+  </ul>
+  </nav>
+  <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->
 </aside>
