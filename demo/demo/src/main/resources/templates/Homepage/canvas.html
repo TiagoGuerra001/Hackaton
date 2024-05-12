@@ -258,7 +258,7 @@
       } else {
         controls.target.copy(newPosition);
         controls.update();
-        controls.enableRotate = true; // Enable camera rotation
+        //controls.enableRotate = true; // Enable camera rotation
       }
     }
 
@@ -268,9 +268,14 @@
   document
     .getElementById("part-description")
     .addEventListener("hidden.bs.offcanvas", () => {
-      camera.position.set(0, 0, 2.5);
-      controls.target.set(0, 0, 0);
-      controls.update();
+      
+      zoomIn(camera, controls, { x: 0, y: 0, z: 2.5 }, { x: 0, y: 0, z: 0 });
+
+      setTimeout(() => {
+        camera.position.set(0, 0, 2.5);
+        controls.target.set(0, 0, 0);
+        controls.update();
+      }, 1000);
     });
 
 

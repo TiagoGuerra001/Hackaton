@@ -72,17 +72,21 @@
           />
         </li>
         <!-- Menu Body -->
-        <li class="user-body">
+        <li class="user-body border-bottom">
           <p class="text-center d-flex flex-column"></p>
-          <p th:text="${userEnter.username}"></p>
-          <small th:text="${userEnter.email}"></small>
+          <span class="badge rounded-pill text-bg-primary  " th:text="${userEnter.username}"></span>
+          <span class="badge rounded-pill text-bg-success" th:text="${userEnter.email}"></span>
+          <div>
+            <i class='fas fa-coins'></i>
+            <span class="badge rounded-pill text-bg-warning" th:text="${userEnter.coins} "></span>
+            
+          </div>
+          
+          </span>
         </li>
-        <!-- Menu Footer-->
-        <li class="user-footer">
-          <a class="btn btn-default btn-flat float-right" href="/logout"
-            >Sign out</a
-          >
-        </li>
+
+        <div class="p-4"><a class="btn btn-default btn-danger" href="/logout">Sign out</a></div>
+        
       </ul>
     </li>
   </ul>

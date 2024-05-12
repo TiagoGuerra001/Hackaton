@@ -14,27 +14,15 @@
   <body>
     <div layout:fragment="content">
       <div class="card card-primary">
-        <div class="card-header">
+        <div class="card-header d-flex w-100">
           <h4>Shop</h4>
+
+          <h4 class="ml-auto">
+            <i class="fas fa-coins"></i>
+            <span th:text="${userCoin}"></span>
+          </h4>
         </div>
         <div class="card-body">
-          <div class="btn-group w-100 mb-2">
-            <a class="btn btn-info" data-filter="1">All Items</a>
-            <a class="btn btn-info" data-filter="2">Organs</a>
-            <a class="btn btn-info" data-filter="3">Others</a>
-          </div>
-          <div class="mb-2">
-            <div class="float-right">
-              <select class="custom-select" style="width: auto" data-sortorder>
-                <option value="asc">Sort by price</option>
-                <option value="desc">Sort by availability</option>
-              </select>
-              <div class="btn-group">
-                <a class="btn btn-default" data-sortasc>Ascending</a>
-                <a class="btn btn-default" data-sortdesc>Descending</a>
-              </div>
-            </div>
-          </div>
           <div
             class="filter-container p-0 row"
             style="
@@ -75,10 +63,11 @@
                         <a
                           type="button"
                           class="btn btn-primary"
+                          th:style="${item.price} > ${userCoin} ? 'pointer-events: none; opacity: 0.5;' : ''"
                           th:href="@{'/shop/' + ${item.id}}"
                         >
                           Buy
-                    </a>
+                        </a>
                       </div>
                     </div>
                   </div>

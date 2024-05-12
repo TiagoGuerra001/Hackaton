@@ -92,7 +92,7 @@ public class WebPageController {
             }
         }
         
-        return "redirect:/";
+        return "redirect:/shop";
     }
 
     @GetMapping("/register")
@@ -124,6 +124,7 @@ public class WebPageController {
         
         model.addAttribute("userEnter", userDAO);
         model.addAttribute("shopItems", itemRepository.findByBoughtFalse());
+        model.addAttribute("userCoin", userRepository.findByUsername(user.getUsername()).get().getCoins());
         
         return "shop";
     }
